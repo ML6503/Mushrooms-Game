@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "justifyContent": "center",
+      "padding": 24,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "margin": 24,
+        "marginTop": 0,
+        "textAlign": "center",
+      }
+    }
+  >
+    Go Mushrooming!
+  </Text>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../src/images/mukhomor.png",
+      }
+    }
+    style={
+      Object {
+        "height": 150,
+        "width": 150,
+      }
+    }
+  />
+</View>
+`;
