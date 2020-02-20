@@ -1,10 +1,8 @@
 {
     "mukhomor": {
         "id": "mukhomor",
-        "nameEn": "fly agaric",
-        "nameRu": "мухомор",
-        "edibilityEn":"poisonous",
-        "edibilityRu":"ядовитый",
+        "name": "fly agaric",        
+        "edibility":"poisonous",
         "score": -5
     }
 }
