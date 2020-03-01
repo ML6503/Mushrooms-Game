@@ -1,22 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-
+import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
+import Mushrooms from './src/Components/Mushrooms';
 
 export default function App() {
   return (
+    <ImageBackground source={require('./assets/images/forest.png')} style={styles.backgroundImage} > 
     <View style={styles.container}>
       <Text style={styles.paragraph}>Go Mushrooming!</Text>
-      <Image
-        style={{width: 150, height: 150}}
-        source={require('./src/images/mukhomor.png')}
-        />
-    </View>
+      <Mushrooms />
+      </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundImage: {
     flex: 1,
+    flexDirection: 'row',
+    resizeMode: 'stretch', // or 'cover'
+  },
+  container: {
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
@@ -24,9 +27,27 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     margin: 24,
-    marginTop: 0,
-    fontSize: 14,
+    marginTop: 50,
+    fontSize: 34,
+    fontStyle:'italic',
     fontWeight: 'bold',
     textAlign: 'center',
+    textShadowRadius: 10,
+    textShadowColor: 'green',
+  },
+  mushroomImg: {
+    height: 150,
+    width: 150,
+    resizeMode: "contain",
+  },
+  mushroom: {
+    flex:1,    
+    justifyContent: 'space-between',
+    padding: 10,
+    alignItems:'center',    
+  },
+  field: {
+    // flex: 1,
+    // flexDirection: 'row',
   },
 });
