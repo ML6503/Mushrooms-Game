@@ -4,5 +4,24 @@
         "name": "fly agaric",        
         "edibility":"poisonous",
         "score": -5
+    },
+    "poganka": {
+        "id": "poganka",
+        "name": "death-cup",        
+        "edibility":"poisonous",
+        "score": -5
+    },
+    "ryzhik": {
+        "id": "ryzhik",
+        "name": "saffron milk cap",        
+        "edibility":"edibile",
+        "score": 5
+    },
+    "zelenushka": {
+        "id": "zelenushka",
+        "name": "man on horseback",        
+        "edibility":"poisonous",
+        "score": -5
     }
+
 }
