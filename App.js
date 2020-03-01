@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
-import Mushrooms from './src/Components/Mushrooms';
+import Mushrooms from './components/Mushrooms';
 
 export default function App() {
   return (
