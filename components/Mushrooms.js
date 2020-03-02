@@ -1,7 +1,18 @@
 import React from 'react';
 import { StyleSheet, View, Image, } from 'react-native';
 
+const mushrooms = require('../assets/data/mushrooms.json');
+
+function getMushrooms() {
+    let mushroomField =[];
+    const m = Object.keys(mushrooms).sort(() => Math.random() - 0.5);
+    m.forEach((key) => mushroomField[key] = mushrooms[key]);
+    return mushroomField;
+}
+
 const Mushrooms = () => {
+    console.log(getMushrooms());
+
     return (
         <View style={styles.field}>
             <View style={styles.mushroom}>
