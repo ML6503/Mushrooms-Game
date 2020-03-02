@@ -3,8 +3,9 @@
         "id": "mukhomor",
         "name": "fly agaric",        
         "edibility":"poisonous",
-        "score": -5
-    },
+        "score": -5,
+        "img":"require('../assets/images/mukhomor.png')"
+        },
     "poganka": {
         "id": "poganka",
         "name": "death-cup",        
