@@ -17,37 +17,25 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     flexDirection: 'row',
+    height: '100%',
     resizeMode: 'stretch', // or 'cover'
+    width: '100%',     
   },
   container: {
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
+    marginLeft: 100,
   },
   paragraph: {
     margin: 24,
     marginTop: 50,
-    fontSize: 34,
+    fontSize: 50,
     fontStyle:'italic',
     fontWeight: 'bold',
     textAlign: 'center',
+    color: 'white',
     textShadowRadius: 10,
-    textShadowColor: 'green',
-  },
-  mushroomImg: {
-    height: 150,
-    width: 150,
-    resizeMode: "contain",
-  },
-  mushroom: {
-    flex:1,    
-    justifyContent: 'space-between',
-    padding: 10,
-    alignItems:'center',    
-  },
-  field: {
-    // flex: 1,
-    // flexDirection: 'row',
-  },
+    textShadowColor: 'black',
+  }
 });

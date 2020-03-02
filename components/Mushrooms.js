@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Image, } from 'react-native';
 
-const Mushrooms = () => (
+const Mushrooms = () => {
+  return (
 <View style={styles.field}>
         <View style={styles.mushroom}>
           <Image
@@ -28,7 +29,8 @@ const Mushrooms = () => (
           />
         </View>
       </View>
-);
+)
+};
 
 const styles = StyleSheet.create({
     mushroomImg: {
