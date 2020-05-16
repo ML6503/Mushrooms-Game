@@ -8,5 +8,6 @@ export const images = {
     poganka: require('../assets/images/blednayaPoganka.png'),
     syroezhka: require('../assets/images/mushroom.png'),
     ryzhik: require('../assets/images/ryzhik.png'),
-    zelenushka: require('../assets/images/zelenushka.png'),    
+    zelenushka: require('../assets/images/zelenushka.png'),
+    grib: require('../assets/images/grib.svg'),    
 };
