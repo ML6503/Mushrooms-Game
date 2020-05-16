@@ -1,11 +1,40 @@
 {
+    "lisichka": {
+        "id": "lisichka",
+        "name": "chanterelle",        
+        "edibility":"edibile",
+        "score": 4       
+    },
+    "lozhnaya lisichka": {
+        "id": "lozhnaya",
+        "name": "false chanterelle",        
+        "edibility":"poisonous",
+        "score": -4       
+    },
+    "mokhovik": {
+        "id": "mokhovik",
+        "name": "variegated bolete",        
+        "edibility":"edibile",
+        "score": 4       
+    },
     "mukhomor": {
         "id": "mukhomor",
         "name": "fly agaric",        
         "edibility":"poisonous",
-        "score": -5,
-        "img":"require('../assets/images/mukhomor.png')"
-        },
+        "score": -5       
+    },
+    "openok": {
+        "id": "openok",
+        "name": "honey fungus",        
+        "edibility":"edibile",
+        "score": 4       
+    },
+    "podberezovik": {
+        "id": "podberezovik",
+        "name": "birch bolete",        
+        "edibility":"edibile",
+        "score": 5       
+    },
     "poganka": {
         "id": "poganka",
         "name": "death-cup",        
@@ -17,6 +46,12 @@
         "name": "saffron milk cap",        
         "edibility":"edibile",
         "score": 5
+    },
+    "syroezhka": {
+        "id": "syroezhka",
+        "name": "russula",        
+        "edibility":"edibile",
+        "score": 3
     },
     "zelenushka": {
         "id": "zelenushka",

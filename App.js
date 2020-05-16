@@ -11,7 +11,7 @@ export default function App() {
         setStartGame(true);
     };
     const content = startGame ? <GameScreen /> : <StartGameScreen  onStartGame={startGameHandler} />; 
-    const forest = startGame ? require('./assets/images/forest.png') : null;
+    const forest = startGame ? require('./assets/images/start.png') : null;
        
     
     return (

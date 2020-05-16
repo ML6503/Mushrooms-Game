@@ -2,11 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import Mushrooms from './components/Mushrooms';
 
-const GameScreen = props => {
+const GameScreen = () => {
     return (
         
         <View style={styles.container}>                
             <Mushrooms />
+            <Basket />
         </View>
         
     );

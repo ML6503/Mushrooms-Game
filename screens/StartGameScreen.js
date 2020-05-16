@@ -40,6 +40,27 @@ const StartGameScreen = props => {
                 <Button title="START GAME" onPress={() => props.onStartGame()} />
             </View>
         );
+
+    const confirmedButton = confirmed ? (
+        <View style={styles.buttonContainer}>  
+            <View style={styles.button}>
+                <Button
+                    title="Go Back"
+                    onPress={backToStart}
+                    color={Colors.accent}
+                />
+            </View>
+        </View>
+    ): 
+        (
+            <View style={styles.button}>
+                <Button
+                    title="Play"
+                    onPress={confirmPlayHandler}
+                    color={Colors.primery}
+                />
+            </View>
+        );
     
     return (
         <TouchableWithoutFeedback
@@ -47,23 +68,8 @@ const StartGameScreen = props => {
                 Keyboard.dismiss();
             }}>
             <View style={styles.screen}>
-                <Text style={styles.title}>Start a new Game!</Text>
-                <View style={styles.buttonContainer}>
-                    <View style={styles.button}>
-                        <Button
-                            title="Go Back"
-                            onPress={backToStart}
-                            color={Colors.accent}
-                        />
-                    </View>
-                    <View style={styles.button}>
-                        <Button
-                            title="Play"
-                            onPress={confirmPlayHandler}
-                            color={Colors.primery}
-                        />
-                    </View>
-                </View>
+                <Text style={styles.title}>Start a new Game!</Text>                                 
+                {confirmedButton}               
                 {confirmedOutput}
             </View>
         </TouchableWithoutFeedback>
