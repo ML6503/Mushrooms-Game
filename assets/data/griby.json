@@ -1,0 +1,66 @@
+{
+    "mushrooms":
+    [
+        {
+        "id": "lisichka",
+        "name": "chanterelle",        
+        "edibility":"edibile",
+        "score": 4       
+    },
+   {
+        "id": "lozhnaya",
+        "name": "false chanterelle",        
+        "edibility":"poisonous",
+        "score": -4       
+    },
+    {
+        "id": "mokhovik",
+        "name": "variegated bolete",        
+        "edibility":"edibile",
+        "score": 4       
+    },
+    {
+        "id": "mukhomor",
+        "name": "fly agaric",        
+        "edibility":"poisonous",
+        "score": -5       
+    },
+     {
+        "id": "openok",
+        "name": "honey fungus",        
+        "edibility":"edibile",
+        "score": 4       
+    },
+    {
+        "id": "podberezovik",
+        "name": "birch bolete",        
+        "edibility":"edibile",
+        "score": 5       
+    },
+    {
+        "id": "poganka",
+        "name": "death-cup",        
+        "edibility":"poisonous",
+        "score": -5
+    },
+    {
+        "id": "ryzhik",
+        "name": "saffron milk cap",        
+        "edibility":"edibile",
+        "score": 5
+    },
+    {
+        "id": "syroezhka",
+        "name": "russula",        
+        "edibility":"edibile",
+        "score": 3
+    },
+    {
+        "id": "zelenushka",
+        "name": "man on horseback",        
+        "edibility":"poisonous",
+        "score": -5
+    }
+    ]
+
+}
