@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 
 import StartGameScreen from './screens/StartGameScreen';
-import GameScreen from './components/Mushrooms';
+import GameScreen from './screens/GameScreen';
 
 export default function App() {
     const [startGame, setStartGame] = useState(false);
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         height: '100%',
-        resizeMode: 'stretch', // or 'cover'
+        resizeMode: 'cover', // or 'stretch'
         width: '100%',     
     },
 });

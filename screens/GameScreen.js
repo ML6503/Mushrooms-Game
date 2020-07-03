@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
-import Mushrooms from './components/Mushrooms';
-import Basket from './components/Basket';
+import Mushrooms from '../components/Mushrooms';
+import Basket from '../components/Basket';
 
 const GameScreen = () => {
     return (
