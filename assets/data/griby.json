@@ -38,12 +38,6 @@
         "score": 5       
     },
     {
-        "id": "poganka",
-        "name": "death-cup",        
-        "edibility":"poisonous",
-        "score": -5
-    },
-    {
         "id": "ryzhik",
         "name": "saffron milk cap",        
         "edibility":"edibile",

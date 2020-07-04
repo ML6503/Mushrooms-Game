@@ -7,12 +7,13 @@ const GameScreen = () => {
     return (
         
         <View style={styles.container}>  
-            <View style={styles.containerBasket}>  
-                <Basket />
-            </View>              
+                       
             <View style={styles.containerMushrooms}>   
                 <Mushrooms />
             </View>
+            <View style={styles.containerBasket}>  
+                <Basket />
+            </View>  
             
         </View>
         
@@ -24,17 +25,19 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         display: 'flex',       
+        flexDirection: 'row',
         justifyContent: 'center',
-        // padding: 24,
-        marginLeft: 100,
+       
+        // marginLeft: 100,
         height: '100vh',
         width: '100vw',
     },
     containerMushrooms: {
-        flexBasis: '80%',
+        flexBasis: '85%',
+        height: '100vh',
     },
     containerBasket: {
-        flexBasis: '20%',
+        flexBasis: '15%',
     },
     
 });
