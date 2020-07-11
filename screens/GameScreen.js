@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert,  Dimensions } from 'react-native';
+
+
+const {height, width} = Dimensions.get('window');
 import Mushrooms from '../components/Mushrooms';
 import Basket from '../components/Basket';
 
@@ -12,7 +15,7 @@ const GameScreen = () => {
                 <Mushrooms />
             </View>
             <View style={styles.containerBasket}>  
-                <Basket />
+                <Basket />              
             </View>  
             
         </View>
@@ -29,15 +32,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
        
         // marginLeft: 100,
-        height: '100vh',
-        width: '100vw',
+        height: height,
+        width: width,        
     },
     containerMushrooms: {
         flexBasis: '85%',
-        height: '100vh',
+        height: height,
+        borderColor: 'red',
+        borderWidth: 2,
     },
     containerBasket: {
         flexBasis: '15%',
+        borderColor: 'red',
+        borderWidth: 2,
     },
     
 });

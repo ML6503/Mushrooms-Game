@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Image, Text, FlatList, ImageBackground  } from 'react-native';
 import Svg, { Path, G } from 'react-native-svg';
 import PropTypes from 'prop-types';
 import { getMushrooms } from '../engine';
@@ -7,6 +7,7 @@ import Basket from './Basket';
 
 import { images } from '../constants/imagesFungi';
 
+const forest = require('../assets/images/forest.png');
 
 const Mushroom = ({ mushroomId, style }) => {
     // console.log('id of each mushroom and pic',mushroomId, images[mushroomId]);
@@ -30,18 +31,21 @@ const Mushrooms = () => {
     const items = getMushrooms();
     console.log('OUR ITEMS', items);
     return (
-
-        <View style={styles.field}>            
-            {Object.keys(getMushrooms()).map((key) =>(
-                <Mushroom
-                    key={key}
-                    index={key}
-                    mushroomId={getMushrooms()[key].id}
-                    mushroom={getMushrooms()[key]}
-                    style={styles.mushroomImg}                    
-                />     
-            ))}                   
-        </View>
+        <ImageBackground source={forest} style={styles.backgroundImage} >
+            <View style={styles.field}> 
+        
+                {Object.keys(items).map((key) =>(
+                    <Mushroom
+                        key={key}
+                        index={key}
+                        mushroomId={items[key].id}
+                        mushroom={items[key]}
+                        style={styles.mushroomImg}                    
+                    />     
+                ))}  
+                                     
+            </View>
+        </ImageBackground>   
     
     )
 };
@@ -55,19 +59,28 @@ const styles = StyleSheet.create({
     mushroom: {
         flexBasis: "33.33%", 
         // justifyContent: 'space-between',
-        padding: 5,
+        // padding: 5,
         alignItems:'center',
-        ...StyleSheet.absoluteFill,
         // fontSize: 0,
         borderWidth: 1,
         borderColor: "black",
         height: "33.33%",
-        width: 189,
+        width: "33.33%",
     },
     field: {
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: 'blue',
+        borderWidth: 5,
+
+    },
+    backgroundImage: {
+        height: '100%',
+        resizeMode: 'cover', // or 'stretch'
+        width: '100%',     
     },
 });
 
