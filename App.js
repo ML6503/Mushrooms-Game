@@ -7,10 +7,15 @@ import GameScreen from './screens/GameScreen';
 export default function App() {
     const [startGame, setStartGame] = useState(false);
 
-    const startGameHandler = () => {
-        setStartGame(true);
+    const startGameHandler = (back) => {
+        if(back) {
+            setStartGame(false);
+        } else {
+            setStartGame(true);
+        }
     };
-    const content = startGame ? <GameScreen /> : <StartGameScreen  onStartGame={startGameHandler} />; 
+
+    const content = startGame ? <GameScreen onStartGame={startGameHandler} /> : <StartGameScreen  onStartGame={startGameHandler} />; 
     const forest = startGame ? require('./assets/start.png') : null;    
     
     return (

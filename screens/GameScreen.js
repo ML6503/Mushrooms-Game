@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Alert,  Dimensions } from 'react-native';
+import PropTypes from 'prop-types';
 
 
 const {height, width} = Dimensions.get('window');
 import Mushrooms from '../components/Mushrooms';
 import Basket from '../components/Basket';
 
-const GameScreen = () => {
+const GameScreen = (props) => {
     return (
         
         <View style={styles.container}>  
@@ -15,7 +16,7 @@ const GameScreen = () => {
                 <Mushrooms />
             </View>
             <View style={styles.containerBasket}>  
-                <Basket />              
+                <Basket onStartGame={props.onStartGame}/>              
             </View>  
             
         </View>
@@ -48,5 +49,10 @@ const styles = StyleSheet.create({
     },
     
 });
+
+GameScreen.propTypes = {
+    onStartGame: PropTypes.func.isRequired, 
+    
+};
 
 export default GameScreen;

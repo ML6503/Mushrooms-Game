@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Image, } from 'react-native';
+import { Button, StyleSheet, View, Image, } from 'react-native';
 import Svg, { Path, G } from 'react-native-svg';
+import PropTypes from 'prop-types';
+import Colors from '../constants/colors';
 
 const basketImg = require('../assets/images/basket.png');
 const BASKET_SIZE = 5;
@@ -15,7 +17,7 @@ const MushroomIcon = () => (
     </View>
 );
 
-const Basket = () => {
+const Basket = (props) => {
     
     // const basketMushrooms = [1,2,3,4,5];
     const basketMushrooms = new Array(BASKET_SIZE).fill().map(() => { return {}; });
@@ -29,6 +31,13 @@ const Basket = () => {
                 style={styles.basketImg}
                 source={basketImg}
             />
+            <View style={styles.button}>
+                <Button
+                    title="Back" 
+                    onPress={() => props.onStartGame("back")}
+                    color={Colors.gameButton}                    
+                />
+            </View>
         </View>
     )
 }
@@ -52,6 +61,14 @@ const styles = StyleSheet.create({
         // borderColor: 'blue',
         // borderWidth: 2,
     },
+    button: {
+        width: 70,
+    }, 
 });
+
+Basket.propTypes = {
+    onStartGame: PropTypes.func.isRequired, 
+    
+};
 
 export default Basket;
