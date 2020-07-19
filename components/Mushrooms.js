@@ -3,14 +3,14 @@ import { TouchableWithoutFeedback, StyleSheet, View, Image, Text, FlatList, Imag
 import Svg, { Path, G } from 'react-native-svg';
 import PropTypes from 'prop-types';
 import { getMushrooms } from '../engine';
-import Basket from './Basket';
+
 
 import { images } from '../constants/imagesFungi';
 
 const forest = require('../assets/images/forest.png');
 
 const Mushroom = ({ mushroomId, style }) => {
-    // console.log('id of each mushroom and pic',mushroomId, images[mushroomId]);
+    
     const [selected, setSelected] = useState(false);
    
     return (
@@ -37,7 +37,7 @@ const Mushroom = ({ mushroomId, style }) => {
 };
 const Mushrooms = () => {
     const items = getMushrooms();
-    console.log('OUR ITEMS', items);
+    
     return (
         <ImageBackground source={forest} style={styles.backgroundImage} >
             <View style={styles.field}> 
@@ -61,29 +61,26 @@ const Mushrooms = () => {
 const styles = StyleSheet.create({
     mushroomImg: {
         height: 50,
-        width: 50,
         resizeMode: "contain",
+        width: 50,        
     },
     mushroom: {
-        flexBasis: "33.33%", 
-        justifyContent: 'center',
-        // padding: 5,
-        alignItems:'center',
-        // fontSize: 0,
+        alignItems:'center',        
         borderWidth: 1,
         borderColor: "black",
+        flexBasis: "33.33%",              
         height: "33.33%",
+        justifyContent: 'center',
         width: "33.33%",
     },
     field: {
+        alignItems: 'center',
+        borderColor: 'blue',
+        borderWidth: 5,
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        alignItems: 'center',
-        borderColor: 'blue',
-        borderWidth: 5,
-
     },
     backgroundImage: {
         height: '100%',
