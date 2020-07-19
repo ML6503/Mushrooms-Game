@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         // borderWidth: 2,
     },
     button: {
-        width: 70,
+        width: 60,
     }, 
 });
 
