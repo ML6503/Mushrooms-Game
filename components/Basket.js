@@ -3,9 +3,9 @@ import { Button, StyleSheet, View, Image, } from 'react-native';
 import Svg, { Path, G } from 'react-native-svg';
 import PropTypes from 'prop-types';
 import Colors from '../constants/colors';
+import { basketMushrooms } from '../engine';
 
 const basketImg = require('../assets/images/basket.png');
-const BASKET_SIZE = 5;
 
 const MushroomIcon = () => (
     <View style={styles.basketMushroom}>
@@ -20,7 +20,7 @@ const MushroomIcon = () => (
 const Basket = (props) => {
     
     // const basketMushrooms = [1,2,3,4,5];
-    const basketMushrooms = new Array(BASKET_SIZE).fill().map(() => { return {}; });
+    // const basketMushrooms = new Array(BASKET_SIZE).fill().map(() => { return {}; });
     console.log('OUR  basketMushrooms',  basketMushrooms);
 
     return (        
