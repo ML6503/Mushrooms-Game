@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableWithoutFeedback, StyleSheet, View, Image, Text, FlatList, ImageBackground  } from 'react-native';
+import { TouchableWithoutFeedback, StyleSheet, View, Image, ImageBackground  } from 'react-native';
 import Svg, { Path, G } from 'react-native-svg';
 import PropTypes from 'prop-types';
 import { getMushrooms } from '../engine';
@@ -14,7 +14,7 @@ const Mushroom = ({ mushroomId, style }) => {
     const [selected, setSelected] = useState(false);
    
     return (
-        < TouchableWithoutFeedback onPress={()=>setSelected(true)} >
+        < TouchableWithoutFeedback onPress={ () => setSelected(true) } >
         
             <View style={styles.mushroom}>
           
