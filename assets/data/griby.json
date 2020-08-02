@@ -8,10 +8,10 @@
         "score": 4       
     },
    {
-        "id": "lozhnaya",
-        "name": "false chanterelle",        
+        "id": "poganka",
+        "name": "death-cup",        
         "edibility":"poisonous",
-        "score": -4       
+        "score": -5      
     },
     {
         "id": "mokhovik",

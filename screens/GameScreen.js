@@ -1,6 +1,7 @@
-import React, { useState, useRef, useMemo, useCallback } from 'react';
-import { View, Text, StyleSheet, Dimensions, Animated, PanResponder } from 'react-native';
+import React, { useState, useRef, useMemo, useCallback,  } from 'react';
+import { View, Text, StyleSheet, Dimensions, Animated, PanResponder, Image, findNodeHandle  } from 'react-native';
 import PropTypes from 'prop-types';
+
 
 
 const {height, width} = Dimensions.get('window');
@@ -12,8 +13,8 @@ const GameScreen = (props) => {
     // used from https://snack.expo.io/@arethel/9f9b64
     const dropZoneValues = useRef(null);
     const pan = useRef(new Animated.ValueXY());
-    const [bgColor, setBgColor] = useState('#2c3e50');
-
+    const [bgColor, setBgColor] = useState();
+     
     const isDropZone = useCallback((gesture) => {
         const dz = dropZoneValues.current;
         return gesture.moveY > dz.y && gesture.moveY < dz.y + dz.height;
@@ -28,9 +29,13 @@ const GameScreen = (props) => {
         dropZoneValues.current = event.nativeEvent.layout;
     });
 
+    
     const panResponder = useMemo(() => PanResponder.create({
+      
         onStartShouldSetPanResponder: () => true,
-
+        // onPanResponderMove: (event, gesture) => {
+        //     console.log("from PAN RESPONDER", gesture);
+        // },
         onPanResponderMove: Animated.event([null, {
             dx  : pan.current.x,
             dy  : pan.current.y
@@ -47,14 +52,34 @@ const GameScreen = (props) => {
         }
     }), []);
 
+     
     return (
         
         <View style={styles.container}>  
-                       
-            <View style={styles.containerMushrooms}>   
-                <Mushrooms 
+
+            {/* <Animated.View              
+                ref={ref => (animatedViewRefs[0] = ref)}
+                {...panResponder.panHandlers}
+                style={[pan.current.getLayout()]}
+            >
+          
+                <Image
+                    style={{height: 50, width: 50, position: 'absolute', zIndex: 100 } }
+                    source={require('../assets/images/mukhomor.png')}
+                />
+            </Animated.View>  
+            <Animated.View            
+                ref={ref => (animatedViewRefs[1] = ref)}
+                {...panResponder.panHandlers}
+                style={[pan.current.getLayout()]}
+            >
+                <Text style={styles.text}>Drag me 222 !</Text>
+            </Animated.View>  */}
+
+            <View style={styles.containerMushrooms}>               
+                <Mushrooms          
                     {...panResponder.panHandlers}
-                    style={pan.current.getLayout()}/>
+                    style={pan.current.getLayout() }/>                    
             </View>
             <View style={styles.containerBasket}>  
                 <Basket
@@ -85,11 +110,13 @@ const styles = StyleSheet.create({
         height: height,
         borderColor: 'red',
         borderWidth: 2,
+        zIndex: 2,
     },
     containerBasket: {
         flexBasis: '15%',
         borderColor: 'red',
         borderWidth: 2,
+        zIndex: 1,
     },
     
 });

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableWithoutFeedback, StyleSheet, View, Image, ImageBackground  } from 'react-native';
+import { TouchableWithoutFeedback, StyleSheet, View, Image, ImageBackground, Animated  } from 'react-native';
 import Svg, { Path, G } from 'react-native-svg';
 import PropTypes from 'prop-types';
 import { getMushrooms } from '../engine';
@@ -9,21 +9,24 @@ import { images } from '../constants/imagesFungi';
 
 const forest = require('../assets/images/forest.png');
 
-const Mushroom = ({ mushroomId, style }) => {
+const Mushroom = ( { mushroomId, style, index, handleMushroomSelected, selected, ...handlers }) => {
+
+    const onPress = () => { handleMushroomSelected(index), console.log("WE ARE OnPRESS!!!") };
     
-    const [selected, setSelected] = useState(false);
    
     return (
-        < TouchableWithoutFeedback onPress={ () => setSelected(true) } >
+        < TouchableWithoutFeedback onPress={ onPress } >
         
             <View style={styles.mushroom}>
           
                 { selected ?  
-                    ( <Image
-                        mushroomId ={mushroomId}
-                        style={style}
-                        source={images[mushroomId]}
-                    /> )
+                    ( <Animated.View {...handlers} style={style} >
+                        <Image
+                            mushroomId ={mushroomId}
+                            style={styles.mushroomImg}
+                            source={images[mushroomId]}
+                        />
+                    </Animated.View> )
                     :
                     (<Svg height="20%" width="20%" viewBox="0 0 339 447" vertical-align="top">
                         <G id="fungi" stroke="none" strokeWidth="1" fill="black" fillRule="evenodd">
@@ -35,8 +38,13 @@ const Mushroom = ({ mushroomId, style }) => {
         </TouchableWithoutFeedback>
     )
 };
-const Mushrooms = () => {
+const Mushrooms = ( props ) => {
     const items = getMushrooms();
+    const [selected, setSelected] = useState(null); 
+    const handleMushroomSelected = (i) => {
+        selected === i ? setSelected(null) : setSelected(i);
+        console.log("WE ARE in HANDLE BUSHROOMS FUNC", i, selected);
+    }
     
     return (
         <ImageBackground source={forest} style={styles.backgroundImage} >
@@ -46,9 +54,12 @@ const Mushrooms = () => {
                     <Mushroom
                         key={key}
                         index={key}
+                        selected={key===selected}
+                        handleMushroomSelected ={handleMushroomSelected}
                         mushroomId={items[key].id}
                         mushroom={items[key]}
-                        style={styles.mushroomImg}                    
+                        style={  props.style } 
+                        { ...props }                   
                     />     
                 ))}  
                                      
@@ -62,7 +73,8 @@ const styles = StyleSheet.create({
     mushroomImg: {
         height: 50,
         resizeMode: "contain",
-        width: 50,        
+        width: 50,
+        zIndex: 101,           
     },
     mushroom: {
         alignItems:'center',        
@@ -72,6 +84,7 @@ const styles = StyleSheet.create({
         height: "33.33%",
         justifyContent: 'center',
         width: "33.33%",
+        zIndex: 100,
     },
     field: {
         alignItems: 'center',
@@ -81,6 +94,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
+        zIndex: 50,
+        position: 'relative',
     },
     backgroundImage: {
         height: '100%',

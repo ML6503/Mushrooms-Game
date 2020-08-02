@@ -21,11 +21,11 @@ const Basket = (props) => {
     
     // const basketMushrooms = [1,2,3,4,5];
     // const basketMushrooms = new Array(BASKET_SIZE).fill().map(() => { return {}; });
-    console.log('OUR  basketMushrooms',  basketMushrooms);
+    // console.log('OUR  basketMushrooms',  basketMushrooms);
 
     return (        
         
-        <View style={styles.basket}>
+        <View onLayout={props.onLayout} style={[styles.basket, props.style ]}>
             { Object.keys(basketMushrooms).map( (m) => (< MushroomIcon key={m}/>)) }
             <Image
                 style={styles.basketImg}
@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
         flex:1,    
         justifyContent: 'space-between',
         padding: 25,
-        alignItems:'center',    
+        alignItems:'center',
+        zIndex: 1,       
     },
     basketMushroom: {
         alignItems: "center",
