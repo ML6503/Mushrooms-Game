@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { TouchableWithoutFeedback, StyleSheet, View, Image, ImageBackground, Animated  } from 'react-native';
 import Svg, { Path, G } from 'react-native-svg';
 import PropTypes from 'prop-types';
-import { getMushrooms } from '../engine';
 
 
 import { images } from '../constants/imagesFungi';
@@ -10,10 +9,10 @@ import { images } from '../constants/imagesFungi';
 const forest = require('../assets/images/forest.png');
 
 const Mushroom = ( { mushroomId, style, index, handleMushroomSelected, selected, ...handlers }) => {
-
+    
     const onPress = () => { handleMushroomSelected(index), console.log("WE ARE OnPRESS!!!") };
     
-   
+       
     return (
         < TouchableWithoutFeedback onPress={ onPress } >
         
@@ -39,25 +38,21 @@ const Mushroom = ( { mushroomId, style, index, handleMushroomSelected, selected,
     )
 };
 const Mushrooms = ( props ) => {
-    const items = getMushrooms();
-    const [selected, setSelected] = useState(null); 
-    const handleMushroomSelected = (i) => {
-        selected === i ? setSelected(null) : setSelected(i);
-        console.log("WE ARE in HANDLE BUSHROOMS FUNC", i, selected);
-    }
+    const { mushrooms, handleMushroomSelected } = props;
     
+      
     return (
         <ImageBackground source={forest} style={styles.backgroundImage} >
             <View style={styles.field}> 
         
-                {Object.keys(items).map((key) =>(
+                {mushrooms.map((m, index) => (
                     <Mushroom
-                        key={key}
-                        index={key}
-                        selected={key===selected}
+                        key={index}
+                        index={index}
+                        selected={m.selected}
                         handleMushroomSelected ={handleMushroomSelected}
-                        mushroomId={items[key].id}
-                        mushroom={items[key]}
+                        mushroomId={m.id}
+                        mushroom={m}
                         style={  props.style } 
                         { ...props }                   
                     />     
@@ -107,6 +102,15 @@ const styles = StyleSheet.create({
 Mushroom.propTypes = {
     mushroomId: PropTypes.string.isRequired, 
     style: PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
+    selected: PropTypes.bool.isRequired,
+    handleMushroomSelected: PropTypes.func.isRequired,
+};
+
+Mushrooms.propTypes = {
+    style: PropTypes.object.isRequired,
+    mushrooms: PropTypes.array.isRequired,
+    handleMushroomSelected: PropTypes.func.isRequired,
 };
 
 export default Mushrooms;

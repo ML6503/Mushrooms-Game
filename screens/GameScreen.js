@@ -2,15 +2,28 @@ import React, { useState, useRef, useMemo, useCallback,  } from 'react';
 import { View, Text, StyleSheet, Dimensions, Animated, PanResponder, Image, findNodeHandle  } from 'react-native';
 import PropTypes from 'prop-types';
 
-
-
 const {height, width} = Dimensions.get('window');
 import Mushrooms from '../components/Mushrooms';
 import Basket from '../components/Basket';
+import { getMushrooms } from '../engine';
+
+
+
 
 const GameScreen = (props) => {
     // code for dragging mushromms with Animated and PanResponder
     // used from https://snack.expo.io/@arethel/9f9b64
+    const items = getMushrooms();
+    const [mushrooms, setMushrooms] = useState(items);
+
+            
+    const handleMushroomSelected = (i) => {
+        const newMushrooms = mushrooms.map((m, index) => i === index ? {...m, selected: true} : {...m, selected: false});
+        // const newMushrooms = [...mushrooms].map((m, index) => i === index ? (m, m.selected = true) : m);
+        console.log(newMushrooms);
+        setMushrooms(newMushrooms);           
+    };
+
     const dropZoneValues = useRef(null);
     const pan = useRef(new Animated.ValueXY());
     const [bgColor, setBgColor] = useState();
@@ -19,6 +32,10 @@ const GameScreen = (props) => {
         const dz = dropZoneValues.current;
         return gesture.moveY > dz.y && gesture.moveY < dz.y + dz.height;
     }, []);
+
+    // const updateMushrooms = (selected) => {
+
+    // }
 
     const onMove = useCallback((_, gesture) => {
         if (isDropZone(gesture)) setBgColor('red');
@@ -48,6 +65,10 @@ const GameScreen = (props) => {
                     pan.current,
                     {toValue:{x:0,y:0}}
                 ).start();
+            }
+            if(isDropZone(gesture)) {
+                // console.log("WE ARE on Reasel - event", e);
+                // console.log("WE ARE on Reasel - gesture", gesture);
             }
         }
     }), []);
@@ -79,7 +100,9 @@ const GameScreen = (props) => {
             <View style={styles.containerMushrooms}>               
                 <Mushrooms          
                     {...panResponder.panHandlers}
-                    style={pan.current.getLayout() }/>                    
+                    style={pan.current.getLayout() }
+                    mushrooms={mushrooms}
+                    handleMushroomSelected={handleMushroomSelected}/>                    
             </View>
             <View style={styles.containerBasket}>  
                 <Basket

@@ -68,7 +68,9 @@ const styles = StyleSheet.create({
 });
 
 Basket.propTypes = {
-    onStartGame: PropTypes.func.isRequired, 
+    onStartGame: PropTypes.func.isRequired,
+    onLayout: PropTypes.func.isRequired,
+    style: PropTypes.object.isRequired,
     
 };
 

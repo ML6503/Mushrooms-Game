@@ -5,55 +5,64 @@
         "id": "lisichka",
         "name": "chanterelle",        
         "edibility":"edibile",
-        "score": 4       
+        "score": 4,
+        "selected": false     
     },
    {
         "id": "poganka",
         "name": "death-cup",        
         "edibility":"poisonous",
-        "score": -5      
+        "score": -5,
+        "selected": false    
     },
     {
         "id": "mokhovik",
         "name": "variegated bolete",        
         "edibility":"edibile",
-        "score": 4       
+        "score": 4,
+        "selected": false      
     },
     {
         "id": "mukhomor",
         "name": "fly agaric",        
         "edibility":"poisonous",
-        "score": -5       
+        "score": -5,
+        "selected": false        
     },
      {
         "id": "openok",
         "name": "honey fungus",        
         "edibility":"edibile",
-        "score": 4       
+        "score": 4,
+        "selected": false       
     },
     {
         "id": "podberezovik",
         "name": "birch bolete",        
         "edibility":"edibile",
-        "score": 5       
+        "score": 5,
+        "selected": false        
     },
     {
         "id": "ryzhik",
         "name": "saffron milk cap",        
         "edibility":"edibile",
-        "score": 5
+        "score": 5,
+        "selected": false  
     },
     {
         "id": "syroezhka",
         "name": "russula",        
         "edibility":"edibile",
-        "score": 3
+        "score": 3,
+        "selected": false  
     },
     {
         "id": "zelenushka",
         "name": "man on horseback",        
         "edibility":"poisonous",
-        "score": -5
+        "score": -5,
+        "selected": false  
     }
     ]
 
