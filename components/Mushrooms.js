@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TouchableWithoutFeedback, StyleSheet, View, Image, ImageBackground, Animated  } from 'react-native';
 import Svg, { Path, G } from 'react-native-svg';
 import PropTypes from 'prop-types';
 
-
 import { images } from '../constants/imagesFungi';
 
 const forest = require('../assets/images/forest.png');
+
+const { status: statusConst } = require('../constants/constants');
 
 const Mushroom = ( { mushroomId, style, index, handleMushroomSelected, status, ...handlers }) => {
     
@@ -14,14 +15,14 @@ const Mushroom = ( { mushroomId, style, index, handleMushroomSelected, status, .
     
        
     return (
-        status === "in_basket"
+        status === statusConst.IN_BASKET
             ? (<View style={styles.mushroom}/>)             
     
             : (< TouchableWithoutFeedback onPress={ onPress } >
         
                 <View style={styles.mushroom}>
           
-                    { status === "picked" ?  
+                    { status === statusConst.PICKED ?  
                         ( <Animated.View {...handlers} style={style} >
                             <Image
                                 mushroomId ={mushroomId}

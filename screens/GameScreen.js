@@ -2,12 +2,13 @@ import React, { useState, useRef, useMemo, useCallback,  } from 'react';
 import { View, Text, StyleSheet, Dimensions, Animated, PanResponder, Image, findNodeHandle  } from 'react-native';
 import PropTypes from 'prop-types';
 
-const {height, width} = Dimensions.get('window');
 import Mushrooms from '../components/Mushrooms';
 import Basket from '../components/Basket';
 import { getMushrooms } from '../engine';
 
+const {height, width} = Dimensions.get('window');
 
+const { status: statusConst } = require('../constants/constants');
 
 
 const GameScreen = (props) => {
@@ -25,7 +26,7 @@ const GameScreen = (props) => {
     console.log('STATE PICKED ', picked);
     
     const getSelectedMushroom = (mArray) => {
-        const selectedMushroom = mArray.filter((m) => m.status === "picked");
+        const selectedMushroom = mArray.filter((m) => m.status === statusConst.PICKED);
                 
         return selectedMushroom[0];
     }
@@ -33,7 +34,7 @@ const GameScreen = (props) => {
     const handleMushroomSelected = (i) => {
 
         const newMushrooms = mushrooms.map((m, index) => (i === index)
-            ? {...m, status: "picked"}  : {...m, status: "in_field"});     
+            ? {...m, status: statusConst.PICKED}  : {...m, status: statusConst.IN_FIELD});     
                      
         setMushrooms(newMushrooms);
 
@@ -55,15 +56,15 @@ const GameScreen = (props) => {
     const updateMushrooms = () => {  
         console.log("pickedRef from updateMushrooms", pickedRef.current);     
         console.log("STATE picked from updateMushrooms", picked);
-        const updatedMushrooms = mushrooms.map((m) => m.id === pickedRef.current ? { ...m, status: "in_basket" } : m);      
+        const updatedMushrooms = mushrooms.map((m) => m.id === pickedRef.current ? { ...m, status: statusConst.IN_BASKET } : m);      
 
         console.log("we are in updatedMushrooms and they are ", updatedMushrooms);  
-        setMushrooms(updatedMushrooms);           
+        setMushrooms(updatedMushrooms);
+        setPicked('');           
     }
 
 
     const onMove = useCallback((_, gesture) => {
-        // setPickedMushroom();
         if (isDropZone(gesture)) setBgColor('red');
         else {
             setBgColor('#2c3e50');            
@@ -89,7 +90,7 @@ const GameScreen = (props) => {
                 listener: onMove
             }),
             onPanResponderRelease: (e, gesture) => {
-                console.log("WE ARE in old PanResponder");
+                
                 if (!isDropZone(gesture)) {
                     Animated.spring(
                         pan.current,
@@ -98,7 +99,8 @@ const GameScreen = (props) => {
                 }
                 if(isDropZone(gesture)) {
                     // console.log("WE ARE on Release - event", e.nativeEvent.target);
-                    updateMushrooms();                
+                    updateMushrooms();
+                    setBgColor();                 
                 }            
             },
                      
@@ -121,7 +123,7 @@ const GameScreen = (props) => {
                 <Basket
                     onStartGame={props.onStartGame}
                     onLayout={setDropZoneValues}
-                    style={ {backgroundColor: bgColor}}/>              
+                    style={ {backgroundColor: bgColor} }/>              
             </View>  
             
         </View>
