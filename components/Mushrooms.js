@@ -10,7 +10,7 @@ const forest = require('../assets/images/forest.png');
 
 const Mushroom = ( { mushroomId, style, index, handleMushroomSelected, selected, ...handlers }) => {
     
-    const onPress = () => { handleMushroomSelected(index), console.log("WE ARE OnPRESS!!!") };
+    const onPress = () => { handleMushroomSelected(index) };
     
        
     return (
@@ -45,7 +45,7 @@ const Mushrooms = ( props ) => {
         <ImageBackground source={forest} style={styles.backgroundImage} >
             <View style={styles.field}> 
         
-                {mushrooms.map((m, index) => (
+                { mushrooms.map((m, index) => (
                     <Mushroom
                         key={index}
                         index={index}
@@ -55,7 +55,7 @@ const Mushrooms = ( props ) => {
                         mushroom={m}
                         style={  props.style } 
                         { ...props }                   
-                    />     
+                    />
                 ))}  
                                      
             </View>

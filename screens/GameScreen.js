@@ -15,14 +15,33 @@ const GameScreen = (props) => {
     // used from https://snack.expo.io/@arethel/9f9b64
     const items = getMushrooms();
     const [mushrooms, setMushrooms] = useState(items);
-
-            
+    const [picked, setPicked] = useState('');
+    
+    console.log('STATE PICKED ', picked);
+    
+    const getSelectedMushroom = (mArray) => {
+        const selectedMushroom = mArray.filter((m) => m.selected === true);
+                
+        return selectedMushroom[0];
+    }
+    
     const handleMushroomSelected = (i) => {
-        const newMushrooms = mushrooms.map((m, index) => i === index ? {...m, selected: true} : {...m, selected: false});
-        // const newMushrooms = [...mushrooms].map((m, index) => i === index ? (m, m.selected = true) : m);
-        console.log(newMushrooms);
-        setMushrooms(newMushrooms);           
+
+        const newMushrooms = mushrooms.map((m, index) => (i === index)
+            ? {...m, selected: true}  : {...m, selected: false});     
+                     
+        setMushrooms(newMushrooms);
+
+        // we get selected mushroom and set selected state
+        const sMushroom = getSelectedMushroom(newMushrooms);
+        setPicked(sMushroom.id);            
     };
+
+    // const setPickedMushroom = () => {
+    //     // we get selected mushroom and set selected state
+    //     const sMushroom = getSelectedMushroom(mushrooms);
+    //     setPicked(sMushroom.id);   
+    // } 
 
     const dropZoneValues = useRef(null);
     const pan = useRef(new Animated.ValueXY());
@@ -33,13 +52,24 @@ const GameScreen = (props) => {
         return gesture.moveY > dz.y && gesture.moveY < dz.y + dz.height;
     }, []);
 
-    // const updateMushrooms = (selected) => {
+    const updateMushrooms = () => {       
+        console.log("STATE picked from updateMushrooms", picked);
+        const updatedMushrooms = mushrooms.map((m) => { 
+            console.log("ID of Selected is ", picked, " and ID of M is ", m.id);
+            m.id === picked ? { selected: false } : m;
+        });      
 
-    // }
+        console.log("we are in updatedMushrooms and they are ", updatedMushrooms);  
+        setMushrooms(updatedMushrooms);           
+    }
+
 
     const onMove = useCallback((_, gesture) => {
+        // setPickedMushroom();
         if (isDropZone(gesture)) setBgColor('red');
-        else setBgColor('#2c3e50');
+        else {
+            setBgColor('#2c3e50');            
+        }
     }, [isDropZone]);
 
     const setDropZoneValues = useCallback((event) => {
@@ -67,35 +97,17 @@ const GameScreen = (props) => {
                 ).start();
             }
             if(isDropZone(gesture)) {
-                // console.log("WE ARE on Reasel - event", e);
-                // console.log("WE ARE on Reasel - gesture", gesture);
-            }
-        }
+                console.log("WE ARE on Release - event", e.nativeEvent.target);
+                updateMushrooms();                
+            }            
+        },
+                     
     }), []);
 
      
     return (
         
         <View style={styles.container}>  
-
-            {/* <Animated.View              
-                ref={ref => (animatedViewRefs[0] = ref)}
-                {...panResponder.panHandlers}
-                style={[pan.current.getLayout()]}
-            >
-          
-                <Image
-                    style={{height: 50, width: 50, position: 'absolute', zIndex: 100 } }
-                    source={require('../assets/images/mukhomor.png')}
-                />
-            </Animated.View>  
-            <Animated.View            
-                ref={ref => (animatedViewRefs[1] = ref)}
-                {...panResponder.panHandlers}
-                style={[pan.current.getLayout()]}
-            >
-                <Text style={styles.text}>Drag me 222 !</Text>
-            </Animated.View>  */}
 
             <View style={styles.containerMushrooms}>               
                 <Mushrooms          

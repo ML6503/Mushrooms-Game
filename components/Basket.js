@@ -25,12 +25,14 @@ const Basket = (props) => {
 
     return (        
         
-        <View onLayout={props.onLayout} style={[styles.basket, props.style ]}>
+        <View style={styles.basket}>
             { Object.keys(basketMushrooms).map( (m) => (< MushroomIcon key={m}/>)) }
-            <Image
-                style={styles.basketImg}
-                source={basketImg}
-            />
+            <View onLayout={props.onLayout} style={props.style}>
+                <Image
+                    style={styles.basketImg}
+                    source={basketImg}
+                />
+            </View>
             <View style={styles.button}>
                 <Button
                     title="Back" 

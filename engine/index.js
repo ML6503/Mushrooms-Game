@@ -29,5 +29,4 @@ export const getMushrooms = () => {
     return mushroomField;
 };
 
-export const basketMushrooms = new Array(BASKET_SIZE).fill().map(() => { return {}; });
-    
+export const basketMushrooms = new Array(BASKET_SIZE).fill().map(() => { return {}; });    
