@@ -16,11 +16,16 @@ const GameScreen = (props) => {
     const items = getMushrooms();
     const [mushrooms, setMushrooms] = useState(items);
     const [picked, setPicked] = useState('');
+
+    const pickedRef = React.useRef();
+    React.useEffect(() => {
+        pickedRef.current = picked;
+    }, [picked]);
     
     console.log('STATE PICKED ', picked);
     
     const getSelectedMushroom = (mArray) => {
-        const selectedMushroom = mArray.filter((m) => m.selected === true);
+        const selectedMushroom = mArray.filter((m) => m.status === "picked");
                 
         return selectedMushroom[0];
     }
@@ -28,7 +33,7 @@ const GameScreen = (props) => {
     const handleMushroomSelected = (i) => {
 
         const newMushrooms = mushrooms.map((m, index) => (i === index)
-            ? {...m, selected: true}  : {...m, selected: false});     
+            ? {...m, status: "picked"}  : {...m, status: "in_field"});     
                      
         setMushrooms(newMushrooms);
 
@@ -37,12 +42,7 @@ const GameScreen = (props) => {
         setPicked(sMushroom.id);            
     };
 
-    // const setPickedMushroom = () => {
-    //     // we get selected mushroom and set selected state
-    //     const sMushroom = getSelectedMushroom(mushrooms);
-    //     setPicked(sMushroom.id);   
-    // } 
-
+ 
     const dropZoneValues = useRef(null);
     const pan = useRef(new Animated.ValueXY());
     const [bgColor, setBgColor] = useState();
@@ -52,12 +52,10 @@ const GameScreen = (props) => {
         return gesture.moveY > dz.y && gesture.moveY < dz.y + dz.height;
     }, []);
 
-    const updateMushrooms = () => {       
+    const updateMushrooms = () => {  
+        console.log("pickedRef from updateMushrooms", pickedRef.current);     
         console.log("STATE picked from updateMushrooms", picked);
-        const updatedMushrooms = mushrooms.map((m) => { 
-            console.log("ID of Selected is ", picked, " and ID of M is ", m.id);
-            m.id === picked ? { selected: false } : m;
-        });      
+        const updatedMushrooms = mushrooms.map((m) => m.id === pickedRef.current ? { ...m, status: "in_basket" } : m);      
 
         console.log("we are in updatedMushrooms and they are ", updatedMushrooms);  
         setMushrooms(updatedMushrooms);           
@@ -77,32 +75,35 @@ const GameScreen = (props) => {
     });
 
     
-    const panResponder = useMemo(() => PanResponder.create({
+    const panResponder = useRef(
+        PanResponder.create({
       
-        onStartShouldSetPanResponder: () => true,
-        // onPanResponderMove: (event, gesture) => {
-        //     console.log("from PAN RESPONDER", gesture);
-        // },
-        onPanResponderMove: Animated.event([null, {
-            dx  : pan.current.x,
-            dy  : pan.current.y
-        }], {
-            listener: onMove
-        }),
-        onPanResponderRelease: (e, gesture) => {
-            if (!isDropZone(gesture)) {
-                Animated.spring(
-                    pan.current,
-                    {toValue:{x:0,y:0}}
-                ).start();
-            }
-            if(isDropZone(gesture)) {
-                console.log("WE ARE on Release - event", e.nativeEvent.target);
-                updateMushrooms();                
-            }            
-        },
+            onStartShouldSetPanResponder: () => true,
+            // onPanResponderMove: (event, gesture) => {
+            //     console.log("from PAN RESPONDER", gesture);
+            // },
+            onPanResponderMove: Animated.event([null, {
+                dx  : pan.current.x,
+                dy  : pan.current.y
+            }], {
+                listener: onMove
+            }),
+            onPanResponderRelease: (e, gesture) => {
+                console.log("WE ARE in old PanResponder");
+                if (!isDropZone(gesture)) {
+                    Animated.spring(
+                        pan.current,
+                        {toValue:{x:0,y:0}}
+                    ).start();
+                }
+                if(isDropZone(gesture)) {
+                    // console.log("WE ARE on Release - event", e.nativeEvent.target);
+                    updateMushrooms();                
+                }            
+            },
                      
-    }), []);
+        })
+    ).current;
 
      
     return (
