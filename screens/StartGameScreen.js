@@ -14,66 +14,29 @@ import {
 import Colors from '../constants/colors';
 
 
-const StartGameScreen = props => {
-    const [confirmed, setConfirmed] = useState(false);
-    
-    const confirmPlayHandler = () => {
-        setConfirmed(true);
-    };
-
-    const backToStart = () => {
-        setConfirmed(false);
-    };
-
+const StartGameScreen = ({ navigation }) => {
+        
     const basketImg = require('../assets/images/basket.png');
-    const confirmedOutput = !confirmed ? (
-        <View style={styles.basket}>
-            <Image
-                style={styles.basketImg}
-                source={basketImg}
-            />
-        </View>
-    ):
-        (
-            <View style={styles.summaryContainer}>
-                <Text style={styles.paragraph}>Go Mushrooming!</Text>
-                <Button title="START GAME" onPress={() => props.onStartGame()} />
-            </View>
-        );
-
-    const confirmedButton = confirmed ? (
-        <View style={styles.buttonContainer}>  
-            <View style={styles.button}>
-                <Button
-                    title="Go Back"
-                    onPress={backToStart}
-                    color={Colors.accent}
-                />
-            </View>
-        </View>
-    ): 
-        (
-            <View style={styles.button}>
-                <Button
-                    title="Play"
-                    onPress={confirmPlayHandler}
-                    color={Colors.primery}
-                />
-            </View>
-        );
-    
-    return (
-        <TouchableWithoutFeedback
-            onPress={() => {
-                Keyboard.dismiss();
-            }}>
+    const startGame = (
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.screen}>
-                <Text style={styles.title}>Start a new Game!</Text>                                 
-                {confirmedButton}               
-                {confirmedOutput}
+                <Text style={styles.title}>Go Mushrooming!</Text>    
+                <View style={styles.basket}>
+                    <Image
+                        style={styles.basketImg}
+                        source={basketImg}
+                    />
+                </View>  
+       
+                <View style={styles.summaryContainer}>            
+                    <Button title="START GAME" onPress={() => navigation.navigate('GameScreen')} style={styles.button}/>
+                </View>
             </View>
         </TouchableWithoutFeedback>
     );
+
+    
+    return startGame;
 };
 
 

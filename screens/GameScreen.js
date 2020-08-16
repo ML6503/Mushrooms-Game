@@ -1,5 +1,5 @@
-import React, { useState, useRef, useMemo, useCallback,  } from 'react';
-import { View, Text, StyleSheet, Dimensions, Animated, PanResponder, Image, findNodeHandle  } from 'react-native';
+import React, { useState, useRef, useCallback,  } from 'react';
+import { View, Text, StyleSheet, Dimensions, Animated, PanResponder, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 import Mushrooms from '../components/Mushrooms';
@@ -11,7 +11,7 @@ const {height, width} = Dimensions.get('window');
 const { status: statusConst } = require('../constants/constants');
 
 
-const GameScreen = (props) => {
+const GameScreen = ({ navigation }) => {
     // code for dragging mushromms with Animated and PanResponder
     // used from https://snack.expo.io/@arethel/9f9b64
     const items = getMushrooms();
@@ -121,7 +121,7 @@ const GameScreen = (props) => {
             </View>
             <View style={styles.containerBasket}>  
                 <Basket
-                    onStartGame={props.onStartGame}
+                    navigation={navigation}
                     onLayout={setDropZoneValues}
                     style={ {backgroundColor: bgColor} }/>              
             </View>  

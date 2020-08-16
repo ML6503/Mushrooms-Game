@@ -36,7 +36,7 @@ const Basket = (props) => {
             <View style={styles.button}>
                 <Button
                     title="Back" 
-                    onPress={() => props.onStartGame("back")}
+                    onPress={() => props.navigation.navigate('StartGameScreen')}
                     color={Colors.gameButton}                    
                 />
             </View>
