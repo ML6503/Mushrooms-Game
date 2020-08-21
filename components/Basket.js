@@ -36,7 +36,7 @@ const Basket = (props) => {
             <View style={styles.button}>
                 <Button
                     title="Back" 
-                    onPress={() => props.navigation.navigate('StartGameScreen')}
+                    onPress={() => props.navigation.navigate('StartGame')}
                     color={Colors.gameButton}                    
                 />
             </View>
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 25,
         alignItems:'center',
+        backgroundColor: Colors.backGround,
         zIndex: 1,       
     },
     basketMushroom: {
@@ -70,9 +71,9 @@ const styles = StyleSheet.create({
 });
 
 Basket.propTypes = {
-    onStartGame: PropTypes.func.isRequired,
     onLayout: PropTypes.func.isRequired,
     style: PropTypes.object.isRequired,
+    navigation: PropTypes.object.isRequired,
     
 };
 

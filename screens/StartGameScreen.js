@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -9,34 +9,66 @@ import {
     TouchableWithoutFeedback,
     Keyboard,
     Image,
+    Dimensions,
+    Animated,
+    PanResponder,
 } from 'react-native';
 
-import Colors from '../constants/colors';
 
+const basketImg = require('../assets/images/basket.png');
+
+const Swiper = ({ navigation }) => {
+
+    // adding animated values
+    const translateX = new Animated.Value(0);
+    
+    // PanResponder code
+    const panResponder = PanResponder.create({
+        onStartShouldSetPanResponder: () => true,
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderMove: (e, gesture) => {
+            Animated.event([null, { dx: translateX }], {useNativeDriver: false})(e, gesture);
+     
+        },
+        onPanResponderRelease: () => {
+            
+            Animated.timing(translateX, {
+                toValue: 0,
+                duration: 200,
+                useNativeDriver: true
+            }).start(() => navigation.navigate('Game'));
+        }
+    });
+
+    return (
+        <Animated.View 
+            style={{transform: [{ translateX }]}}
+            {...panResponder.panHandlers}
+        >
+            <View style={styles.basket}>
+                <Image
+                    style={styles.basketImg}
+                    source={basketImg}
+                />
+            </View>
+        </Animated.View>
+    );
+};
 
 const StartGameScreen = ({ navigation }) => {
-        
-    const basketImg = require('../assets/images/basket.png');
-    const startGame = (
+
+               
+    return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.screen}>
                 <Text style={styles.title}>Go Mushrooming!</Text>    
-                <View style={styles.basket}>
-                    <Image
-                        style={styles.basketImg}
-                        source={basketImg}
-                    />
-                </View>  
-       
-                <View style={styles.summaryContainer}>            
-                    <Button title="START GAME" onPress={() => navigation.navigate('GameScreen')} style={styles.button}/>
-                </View>
+                
+                <Swiper navigation={navigation}/>           
+                            
             </View>
         </TouchableWithoutFeedback>
-    );
-
+    );  
     
-    return startGame;
 };
 
 
@@ -51,7 +83,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20,
-        marginVertical: 10,
+        marginVertical: 40,
     },
     buttonContainer: {
         flexDirection: 'row',
@@ -88,10 +120,17 @@ const styles = StyleSheet.create({
     },
 });
 
-
 StartGameScreen.propTypes = {
-    onStartGame: PropTypes.func.isRequired, 
-    
+    navigation: PropTypes.object.isRequired,     
 };
+
+Swiper.propTypes = {
+    navigation: PropTypes.object.isRequired,     
+};
+// BasketImage.propTypes = {
+//     navigation: PropTypes.object.isRequired,     
+//     styleBasket: PropTypes.object.isRequired, 
+//     styleBasketImg: PropTypes.object.isRequired, 
+// };
 
 export default StartGameScreen;

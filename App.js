@@ -6,8 +6,21 @@ import GameScreen from './screens/GameScreen';
 
 const AppNavigator = createStackNavigator(
     {
-        StartGame: StartGameScreen,
-        Game: GameScreen,
+        StartGame: {
+            screen: StartGameScreen,
+            
+            navigationOptions: () => ({
+                headerShown: false,
+                
+            }),
+        },
+        Game: {
+            screen: GameScreen,
+            // headerMode: 'none',
+            navigationOptions: () => ({
+                headerShown: false,                
+            }),
+        },
         // Basket: BasketScreen,
     },
     {

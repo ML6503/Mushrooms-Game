@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback,  } from 'react';
-import { View, Text, StyleSheet, Dimensions, Animated, PanResponder, Image } from 'react-native';
+import { View, StyleSheet, Dimensions, Animated, PanResponder } from 'react-native';
 import PropTypes from 'prop-types';
 
 import Mushrooms from '../components/Mushrooms';
@@ -45,7 +45,7 @@ const GameScreen = ({ navigation }) => {
 
  
     const dropZoneValues = useRef(null);
-    const pan = useRef(new Animated.ValueXY());
+    const pan = useRef(new Animated.ValueXY(), { useNativeDriver: true },);
     const [bgColor, setBgColor] = useState();
      
     const isDropZone = useCallback((gesture) => {
@@ -88,13 +88,20 @@ const GameScreen = ({ navigation }) => {
                 dy  : pan.current.y
             }], {
                 listener: onMove
-            }),
+            },
+            {
+                useNativeDriver: true
+            },
+            ),
             onPanResponderRelease: (e, gesture) => {
                 
                 if (!isDropZone(gesture)) {
                     Animated.spring(
                         pan.current,
-                        {toValue:{x:0,y:0}}
+                        {toValue:{x:0,y:0}},
+                        {
+                            useNativeDriver: true
+                        },                        
                     ).start();
                 }
                 if(isDropZone(gesture)) {
@@ -160,8 +167,7 @@ const styles = StyleSheet.create({
 });
 
 GameScreen.propTypes = {
-    onStartGame: PropTypes.func.isRequired, 
-    
+    navigation: PropTypes.object.isRequired,     
 };
 
 export default GameScreen;
