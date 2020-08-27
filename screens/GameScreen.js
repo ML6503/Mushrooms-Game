@@ -14,16 +14,25 @@ const { status: statusConst } = require('../constants/constants');
 const GameScreen = ({ navigation }) => {
     // code for dragging mushromms with Animated and PanResponder
     // used from https://snack.expo.io/@arethel/9f9b64
-    const items = getMushrooms();
-    const [mushrooms, setMushrooms] = useState(items);
+    
+    const [mushrooms, setMushrooms] = useState(null);
     const [picked, setPicked] = useState('');
 
     const pickedRef = React.useRef();
     React.useEffect(() => {
         pickedRef.current = picked;
     }, [picked]);
-    
-    console.log('STATE PICKED ', picked);
+
+    React.useEffect(() => {
+        const items = getMushrooms();
+        setMushrooms(items);
+    }, [] );
+
+    const mushroomsRef = React.useRef();
+    React.useEffect(() => {
+        mushroomsRef.current = mushrooms;
+    }, [mushrooms]);
+
     
     const getSelectedMushroom = (mArray) => {
         const selectedMushroom = mArray.filter((m) => m.status === statusConst.PICKED);
@@ -32,12 +41,21 @@ const GameScreen = ({ navigation }) => {
     }
     
     const handleMushroomSelected = (i) => {
-
-        const newMushrooms = mushrooms.map((m, index) => (i === index)
-            ? {...m, status: statusConst.PICKED}  : {...m, status: statusConst.IN_FIELD});     
-                     
+       
+        const newMushrooms = mushrooms.map((m, index) => {
+            if(m.status !==statusConst.IN_BASKET) {
+                if(i === index ) {
+                    return {...m, status: statusConst.PICKED} ;
+                } else {
+                    return {...m, status: statusConst.IN_FIELD}
+                }
+            } else {
+                return {...m};
+            }           
+        });     
+        
         setMushrooms(newMushrooms);
-
+        
         // we get selected mushroom and set selected state
         const sMushroom = getSelectedMushroom(newMushrooms);
         setPicked(sMushroom.id);            
@@ -45,7 +63,7 @@ const GameScreen = ({ navigation }) => {
 
  
     const dropZoneValues = useRef(null);
-    const pan = useRef(new Animated.ValueXY(), { useNativeDriver: true },);
+    // const pan = useRef(new Animated.ValueXY(), { useNativeDriver: true },);
     const [bgColor, setBgColor] = useState();
      
     const isDropZone = useCallback((gesture) => {
@@ -55,11 +73,10 @@ const GameScreen = ({ navigation }) => {
 
     const updateMushrooms = () => {  
         console.log("pickedRef from updateMushrooms", pickedRef.current);     
-        console.log("STATE picked from updateMushrooms", picked);
-        const updatedMushrooms = mushrooms.map((m) => m.id === pickedRef.current ? { ...m, status: statusConst.IN_BASKET } : m);      
+        const updatedMushrooms = mushroomsRef.current.map((m) => (m.id === pickedRef.current) ? { ...m, status: statusConst.IN_BASKET } : m);      
 
-        console.log("we are in updatedMushrooms and they are ", updatedMushrooms);  
         setMushrooms(updatedMushrooms);
+        console.log("OUR MUSHROOMS after basket", updatedMushrooms);
         setPicked('');           
     }
 
@@ -76,56 +93,22 @@ const GameScreen = ({ navigation }) => {
     });
 
     
-    const panResponder = useRef(
-        PanResponder.create({
-      
-            onStartShouldSetPanResponder: () => true,
-            // onPanResponderMove: (event, gesture) => {
-            //     console.log("from PAN RESPONDER", gesture);
-            // },
-            onPanResponderMove: Animated.event([null, {
-                dx  : pan.current.x,
-                dy  : pan.current.y
-            }], {
-                listener: onMove
-            },
-            {
-                useNativeDriver: true
-            },
-            ),
-            onPanResponderRelease: (e, gesture) => {
-                
-                if (!isDropZone(gesture)) {
-                    Animated.spring(
-                        pan.current,
-                        {toValue:{x:0,y:0}},
-                        {
-                            useNativeDriver: true
-                        },                        
-                    ).start();
-                }
-                if(isDropZone(gesture)) {
-                    // console.log("WE ARE on Release - event", e.nativeEvent.target);
-                    updateMushrooms();
-                    setBgColor();                 
-                }            
-            },
-                     
-        })
-    ).current;
-
+   
      
     return (
         
         <View style={styles.container}>  
-
-            <View style={styles.containerMushrooms}>               
-                <Mushrooms          
-                    {...panResponder.panHandlers}
-                    style={pan.current.getLayout() }
-                    mushrooms={mushrooms}
-                    handleMushroomSelected={handleMushroomSelected}/>                    
-            </View>
+            { mushrooms !== null ? 
+                <View style={styles.containerMushrooms}>           
+                    <Mushrooms          
+                        isDropZone={isDropZone}
+                        onMove={onMove}
+                        setBgColor={setBgColor}
+                        updateMushrooms={updateMushrooms}
+                        mushrooms={mushrooms}
+                        handleMushroomSelected={handleMushroomSelected}/>                    
+                </View> 
+                : null}
             <View style={styles.containerBasket}>  
                 <Basket
                     navigation={navigation}

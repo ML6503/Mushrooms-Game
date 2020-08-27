@@ -1,5 +1,5 @@
-import React from 'react';
-import { TouchableWithoutFeedback, StyleSheet, View, Image, ImageBackground, Animated  } from 'react-native';
+import React, { useRef } from 'react';
+import { TouchableWithoutFeedback, StyleSheet, View, Image, ImageBackground, Animated, PanResponder  } from 'react-native';
 import Svg, { Path, G } from 'react-native-svg';
 import PropTypes from 'prop-types';
 
@@ -9,11 +9,51 @@ const forest = require('../assets/images/forest.png');
 
 const { status: statusConst } = require('../constants/constants');
 
-const Mushroom = ( { mushroomId, style, index, handleMushroomSelected, status, ...handlers }) => {
+const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms, index, handleMushroomSelected, status, }) => {
     
     const onPress = () => { handleMushroomSelected(index) };
     
-       
+    const pan = useRef(new Animated.ValueXY(), { useNativeDriver: true },);
+
+    const panResponder = useRef(
+        PanResponder.create({
+      
+            onStartShouldSetPanResponder: () => true,
+            // onPanResponderMove: (event, gesture) => {
+            //     console.log("from PAN RESPONDER", gesture);
+            // },
+            onPanResponderMove: Animated.event([null, {
+                dx  : pan.current.x,
+                dy  : pan.current.y
+            }], {
+                listener: onMove
+            },
+            {
+                useNativeDriver: true
+            },
+            ),
+            onPanResponderRelease: (e, gesture) => {
+                
+                if (!isDropZone(gesture)) {
+                    Animated.spring(
+                        pan.current,
+                        {toValue:{x:0,y:0}},
+                        {
+                            useNativeDriver: true
+                        },                        
+                    ).start();
+                }
+                if(isDropZone(gesture)) {
+                    // console.log("WE ARE on Release - event", e.nativeEvent.target);
+                    updateMushrooms();
+                    setBgColor();                   
+                    pan.current.flattenOffset();                                   
+                }            
+            },
+                     
+        })
+    ).current; 
+
     return (
         status === statusConst.IN_BASKET
             ? (<View style={styles.mushroom}/>)             
@@ -23,7 +63,7 @@ const Mushroom = ( { mushroomId, style, index, handleMushroomSelected, status, .
                 <View style={styles.mushroom}>
           
                     { status === statusConst.PICKED ?  
-                        ( <Animated.View {...handlers} style={style} >
+                        ( <Animated.View {...panResponder.panHandlers} style={pan.current.getLayout()}  >
                             <Image
                                 mushroomId ={mushroomId}
                                 style={styles.mushroomImg}
