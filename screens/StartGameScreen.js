@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -20,8 +20,9 @@ const basketImg = require('../assets/images/basket.png');
 const Swiper = ({ navigation }) => {
 
     // adding animated values
-    const translateX = new Animated.Value(0);
-    
+    const translateX = new Animated.Value(0); 
+
+    console.log(translateX);
     // PanResponder code
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
@@ -30,26 +31,27 @@ const Swiper = ({ navigation }) => {
             Animated.event([null, { dx: translateX }], {useNativeDriver: false})(e, gesture);
      
         },
-        onPanResponderRelease: () => {
-            
+        onPanResponderRelease: () => { 
+            navigation.navigate('Game');         
+                  
             Animated.timing(translateX, {
-                toValue: 0,
-                duration: 200,
+                toValue: 0,               
                 useNativeDriver: true
-            }).start(() => navigation.navigate('Game'));
+            }
+            ).start();
         }
     });
 
     return (
         <Animated.View 
             style={{transform: [{ translateX }]}}
-            {...panResponder.panHandlers}
+            {...panResponder.panHandlers}            
         >
             <View style={styles.basket}>
                 <Image
                     style={styles.basketImg}
                     source={basketImg}
-                />
+                /> 
             </View>
         </Animated.View>
     );

@@ -19,9 +19,7 @@ const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms
         PanResponder.create({
       
             onStartShouldSetPanResponder: () => true,
-            // onPanResponderMove: (event, gesture) => {
-            //     console.log("from PAN RESPONDER", gesture);
-            // },
+          
             onPanResponderMove: Animated.event([null, {
                 dx  : pan.current.x,
                 dy  : pan.current.y
@@ -146,16 +144,20 @@ const styles = StyleSheet.create({
 
 Mushroom.propTypes = {
     mushroomId: PropTypes.string.isRequired, 
-    style: PropTypes.object.isRequired,
+    // style: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
     handleMushroomSelected: PropTypes.func.isRequired,
+    isDropZone: PropTypes.func.isRequired,
+    onMove:PropTypes.func.isRequired,
+    setBgColor: PropTypes.func.isRequired,
+    updateMushrooms: PropTypes.func.isRequired,
 };
 
 Mushrooms.propTypes = {
-    style: PropTypes.object.isRequired,
+    // style: PropTypes.object.isRequired,
     mushrooms: PropTypes.array.isRequired,
-    handleMushroomSelected: PropTypes.func.isRequired,
+    handleMushroomSelected: PropTypes.func.isRequired,    
 };
 
 export default Mushrooms;
