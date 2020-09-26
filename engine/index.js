@@ -1,32 +1,19 @@
-import { BASKET_SIZE } from '../constants/constants';
+const { status: statusConst, BASKET_SIZE } = require('../constants/constants');
 
-const mushrooms = require('../assets/data/mushrooms.json');
+// const mushrooms = require('../assets/data/mushrooms.json');
 const griby = require('../assets/data/griby.json');
 
 
 
-// function getRandomUpTo(n, caseName) {
-//     // console.log('We are in real getrandom!');
-//     return Math.floor(Math.random() * Math.floor(n));
-// }
-
-// export const getMushrooms = () => {
-//     let mushroomField =[];
-//     const m = (Object.keys(mushrooms).sort(() => Math.random() - 0.5));
-//     m.forEach((key) => mushroomField[key] = mushrooms[key]);
-//     console.log("We are in mushroom fields", Object.keys(mushroomField));
-//     return mushroomField;
-// }
-
-// export const getMushrooms = () => griby.mushrooms;
 export const getMushrooms = () => {
     let mushroomField = griby.mushrooms.sort( () => Math.random() - 0.5);
     mushroomField.forEach((m, index) => mushroomField[index] = {...m});
-    // const m = (Object.keys(griby.mushrooms).sort(() => Math.random() - 0.5));
-    // m.forEach((key) => console.log("Each GRIB", mushroomField[key] = griby.mushrooms[key]));
-    // console.log("We are in mushroom fields", mushroomField);
-
+ 
     return mushroomField;
 };
 
-export const basketMushrooms = new Array(BASKET_SIZE).fill().map(() => { return {}; });    
+const basketMushrooms = new Array(BASKET_SIZE).fill().map(() => { return {}; });    
+
+// we need to find mushroom with status IN_BASKET
+//and put it into basket
+export const getBasketMushrooms = (mushrooms) => [...mushrooms].filter(m => m.status === statusConst.IN_BASKET).concat(basketMushrooms).slice(0, BASKET_SIZE);  

@@ -72,11 +72,11 @@ const GameScreen = ({ navigation }) => {
     }, []);
 
     const updateMushrooms = () => {  
-        console.log("pickedRef from updateMushrooms", pickedRef.current);     
+        // console.log("pickedRef from updateMushrooms", pickedRef.current);     
         const updatedMushrooms = mushroomsRef.current.map((m) => (m.id === pickedRef.current) ? { ...m, status: statusConst.IN_BASKET } : m);      
 
         setMushrooms(updatedMushrooms);
-        console.log("OUR MUSHROOMS after basket", updatedMushrooms);
+        // console.log("OUR MUSHROOMS after basket", updatedMushrooms);
         setPicked('');           
     }
 
@@ -99,22 +99,27 @@ const GameScreen = ({ navigation }) => {
         
         <View style={styles.container}>  
             { mushrooms !== null ? 
-                <View style={styles.containerMushrooms}>           
-                    <Mushrooms          
-                        isDropZone={isDropZone}
-                        onMove={onMove}
-                        setBgColor={setBgColor}
-                        updateMushrooms={updateMushrooms}
-                        mushrooms={mushrooms}
-                        handleMushroomSelected={handleMushroomSelected}/>                    
-                </View> 
-                : null}
-            <View style={styles.containerBasket}>  
-                <Basket
-                    navigation={navigation}
-                    onLayout={setDropZoneValues}
-                    style={ {backgroundColor: bgColor} }/>              
-            </View>  
+                <>
+                    <View style={styles.containerMushrooms}>           
+                        <Mushrooms          
+                            isDropZone={isDropZone}
+                            onMove={onMove}
+                            setBgColor={setBgColor}
+                            updateMushrooms={updateMushrooms}
+                            mushrooms={mushrooms}
+                            handleMushroomSelected={handleMushroomSelected}/>                    
+                    </View> 
+               
+                    <View style={styles.containerBasket}>  
+                        <Basket
+                            navigation={navigation}
+                            onLayout={setDropZoneValues}
+                            style={ {backgroundColor: bgColor} }
+                            mushrooms={mushrooms}
+                        />              
+                    </View> 
+                </>
+                : null} 
             
         </View>
         

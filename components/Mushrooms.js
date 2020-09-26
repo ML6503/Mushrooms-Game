@@ -96,7 +96,7 @@ const Mushrooms = ( props ) => {
                         handleMushroomSelected ={handleMushroomSelected}
                         mushroomId={m.id}
                         mushroom={m}
-                        style={  props.style } 
+                        // style={  props.style } 
                         { ...props }                   
                     />
                 ))}  
