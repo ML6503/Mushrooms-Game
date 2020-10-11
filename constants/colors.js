@@ -4,5 +4,7 @@ export default {
     backGround: '#688c74',
     gameButton: '#003300',
     black: "#000000",
-    orange: "#DAA520"
+    orange: "#DAA520",
+    grey: "#9CA091",
+    
 };
