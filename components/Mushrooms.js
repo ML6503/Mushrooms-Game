@@ -109,9 +109,9 @@ const Mushrooms = ( props ) => {
 
 const styles = StyleSheet.create({
     mushroomImg: {
-        height: 50,
+        height: 100,
         resizeMode: "contain",
-        width: 50,
+        width: 100,
         zIndex: 101,           
     },
     mushroom: {

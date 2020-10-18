@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import StartGameScreen from './screens/StartGameScreen';
 import GameScreen from './screens/GameScreen';
+import BasketScreen from './screens/BasketScreen';
 
 const AppNavigator = createStackNavigator(
     {
@@ -10,7 +11,7 @@ const AppNavigator = createStackNavigator(
             screen: StartGameScreen,
             
             navigationOptions: () => ({
-                headerShown: false,
+                headerShown: false, 
                 
             }),
         },
@@ -21,7 +22,12 @@ const AppNavigator = createStackNavigator(
                 headerShown: false,                
             }),
         },
-        // Basket: BasketScreen,
+        Basket: {
+            screen: BasketScreen,            
+            navigationOptions: () => ({
+                headerShown: false,                
+            }),
+        },
     },
     {
         initialRouteName: 'StartGame',

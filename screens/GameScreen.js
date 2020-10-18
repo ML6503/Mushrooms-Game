@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback,  } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, Animated, PanResponder } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -18,18 +18,18 @@ const GameScreen = ({ navigation }) => {
     const [mushrooms, setMushrooms] = useState(null);
     const [picked, setPicked] = useState('');
 
-    const pickedRef = React.useRef();
-    React.useEffect(() => {
+    const pickedRef = useRef();
+    useEffect(() => {
         pickedRef.current = picked;
     }, [picked]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const items = getMushrooms();
         setMushrooms(items);
     }, [] );
 
-    const mushroomsRef = React.useRef();
-    React.useEffect(() => {
+    const mushroomsRef = useRef();
+    useEffect(() => {
         mushroomsRef.current = mushrooms;
     }, [mushrooms]);
 
@@ -90,13 +90,9 @@ const GameScreen = ({ navigation }) => {
 
     const setDropZoneValues = useCallback((event) => {
         dropZoneValues.current = event.nativeEvent.layout;
-    });
-
-    
-   
+    });   
      
-    return (
-        
+    return (        
         <View style={styles.container}>  
             { mushrooms !== null ? 
                 <>
@@ -119,10 +115,8 @@ const GameScreen = ({ navigation }) => {
                         />              
                     </View> 
                 </>
-                : null} 
-            
-        </View>
-        
+                : null}            
+        </View>        
     );
 };
 

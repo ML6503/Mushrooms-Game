@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 import Colors from '../constants/colors';
 import { getBasketMushrooms } from '../engine';
 
+const { BASKET_SIZE } = require('../constants/constants');
 const basketImg = require('../assets/images/basket.png');
 
 
 const MushroomIcon = ({ m }) => {
     
     const iconColor = m.id !== undefined ? Colors.orange : Colors.grey;
-    console.log('iconColor from MushroomIcon', iconColor);
+    
     return (
         <View style={styles.basketMushroom}>
             <Svg height="100%" width="100%" viewBox="0 0 339 447" vertical-align="top">
@@ -25,8 +26,13 @@ const MushroomIcon = ({ m }) => {
 
 const Basket = (props) => {
     const { mushrooms } = props;
-  
-        
+    
+    if(getBasketMushrooms(mushrooms)[BASKET_SIZE-1].id) {
+        console.log('WE are in IF FULL BASKET and we have', props.navigation, 'nav');
+        props.navigation.push('Basket', {
+            mushroomsBasket: getBasketMushrooms(mushrooms),
+        })
+    }    
     // const getBasketMushrooms = (mushrooms) => [...mushrooms].filter(m => m.status === statusConst.IN_BASKET).concat(basketMushrooms).slice(0, BASKET_SIZE);  
  
     return (        
