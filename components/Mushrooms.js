@@ -61,7 +61,7 @@ const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms
                 <View style={styles.mushroom}>
           
                     { status === statusConst.PICKED ?  
-                        ( <Animated.View {...panResponder.panHandlers} style={pan.current.getLayout()}  >
+                        ( <Animated.View {...panResponder.panHandlers} style={pan.current.getLayout()}>
                             <Image
                                 mushroomId ={mushroomId}
                                 style={styles.mushroomImg}

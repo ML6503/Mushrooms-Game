@@ -9,9 +9,9 @@ const { BASKET_SIZE } = require('../constants/constants');
 const basketImg = require('../assets/images/basket.png');
 
 
-const MushroomIcon = ({ m }) => {
+const MushroomIcon = ( m ) => {
     
-    const iconColor = m.id !== undefined ? Colors.orange : Colors.grey;
+    const iconColor = m ? Colors.orange : Colors.grey;
     
     return (
         <View style={styles.basketMushroom}>
@@ -24,21 +24,29 @@ const MushroomIcon = ({ m }) => {
     )
 };
 
+const MushroomStatus = ({basketMushrooms}) => {
+  
+    return basketMushrooms.map((m, index) => (
+        <View key={index}>{MushroomIcon(m)}</View>
+    ));
+};
+
 const Basket = (props) => {
     const { mushrooms } = props;
     
-    if(getBasketMushrooms(mushrooms)[BASKET_SIZE-1].id) {
-        console.log('WE are in IF FULL BASKET and we have', props.navigation, 'nav');
+    if(getBasketMushrooms(mushrooms)[BASKET_SIZE-1].id) {        
         props.navigation.push('Basket', {
             mushroomsBasket: getBasketMushrooms(mushrooms),
         })
+        console.log('WE are in IF FULL BASKET and we have', props.navigation, 'nav');
     }    
-    // const getBasketMushrooms = (mushrooms) => [...mushrooms].filter(m => m.status === statusConst.IN_BASKET).concat(basketMushrooms).slice(0, BASKET_SIZE);  
+    
  
     return (        
         
         <View style={styles.basket}>
-            { Object.values(getBasketMushrooms(mushrooms)).map( (m, i) => (< MushroomIcon key={i} m={m}/>)) }
+            {/* { Object.values(getBasketMushrooms(mushrooms)).map( (m, i) => (< MushroomIcon key={i} m={m}/>)) } */}
+            <MushroomStatus basketMushrooms={(getBasketMushrooms(mushrooms))}/>
             <View onLayout={props.onLayout} style={props.style}>
                 <Image
                     style={styles.basketImg}
@@ -90,8 +98,11 @@ Basket.propTypes = {
     
 };
 
-MushroomIcon.propTypes = {
-    m: PropTypes.object.isRequired,       
+MushroomIcon.propTypes ={
+    m: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object
+    ]),       
 };
 
 export default Basket;

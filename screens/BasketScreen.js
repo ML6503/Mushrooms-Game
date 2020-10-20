@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, Image } from 'react-native';
+import { View, StyleSheet, Dimensions, Image, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { getBasketMushrooms } from '../engine';
 import { images } from '../constants/imagesFungi';
@@ -7,37 +7,23 @@ import { images } from '../constants/imagesFungi';
 const basketImg = require('../assets/images/basket.png');
 const {height, width} = Dimensions.get('window');
 
-const MushroomBasket = ({ key, index, edibility, mushroomId, mushroom, name }) => {
-
-    return(
-        <View style={styles.mushroom}>
-            <Image
-                mushroomId ={mushroomId}
-                style={styles.mushroomImg}
-                source={images[mushroomId]}
-            />
-        </View>
-    );
-};
+const mushroomImg = ( mushrooms) => mushrooms.map((m, index) => ( <Image key={index} style={styles.mushroomImg} source={images[m.id]} />));
 
 const BasketScreen = ({ navigation }) => {
-    console.log('We are in BASKETSCREEN and got mushrooms', navigation.state.params.mushroomsBasket);
-    const { mushroomsBasket } = navigation.state.params.mushroomsBasket;
+    
+    const  mushroomsBasket = navigation.state.params.mushroomsBasket;
+    console.log('We are in BASKETSCREEN and got mushrooms', mushroomsBasket);
     return(
         <View style={styles.container}>
             <View style={styles.containerMushrooms}>
-                { mushroomsBasket.map((m, index) => (
-                    <MushroomBasket
-                        key={index}
-                        index={index}
-                        edibility={m.edibility}
-                        mushroomId={m.id}
-                        mushroom={m}
-                        name={m.name}                                          
-                    />
-                ))}  
+                {/* { mushroomsBasket.map((m, index) => ( <Image key={index} style={styles.mushroomImg} source={images[m.id]} />))}   */}
+                {mushroomImg(mushroomsBasket)}
             </View>
-            <View style={styles.containerBasket}>{basketImg}</View>
+            <View style={styles.containerBasket}>
+                <Image
+                    style={styles.basketImg}
+                    source={basketImg}
+                /></View>
         </View>
     );
 };
@@ -76,12 +62,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: "33.33%",
         zIndex: 100,
+    },
+    basketImg: {
+        height: 50,
+        width: 50,
+        resizeMode: "contain",
+    },
+    mushroomImg: {
+        height: 100,
+        resizeMode: "contain",
+        width: 100,
+        zIndex: 101,           
     },    
 });
 
 BasketScreen.propTypes = {
-    navigation: PropTypes.object.isRequired,     
-    route: PropTypes.object.isRequired,     
+    navigation: PropTypes.object.isRequired,   
 };
 
 export default BasketScreen;
