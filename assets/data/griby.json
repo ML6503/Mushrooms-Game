@@ -4,7 +4,7 @@
         {
         "id": "lisichka",
         "name": "chanterelle",        
-        "edibility":"edibile",
+        "edibility":"edible",
         "score": 4,
         "status": "in_field"     
     },
@@ -18,7 +18,7 @@
     {
         "id": "mokhovik",
         "name": "variegated bolete",        
-        "edibility":"edibile",
+        "edibility":"edible",
         "score": 4,
         "status": "in_field"        
     },
@@ -32,28 +32,28 @@
      {
         "id": "openok",
         "name": "honey fungus",        
-        "edibility":"edibile",
+        "edibility":"edible",
         "score": 4,
         "status": "in_field"   
     },
     {
         "id": "podberezovik",
         "name": "birch bolete",        
-        "edibility":"edibile",
+        "edibility":"edible",
         "score": 5,
         "status": "in_field"      
     },
     {
         "id": "ryzhik",
         "name": "saffron milk cap",        
-        "edibility":"edibile",
+        "edibility":"edible",
         "score": 5,
         "status": "in_field"   
     },
     {
         "id": "syroezhka",
         "name": "russula",        
-        "edibility":"edibile",
+        "edibility":"edible",
         "score": 3,
         "status": "in_field" 
     },

@@ -6,5 +6,6 @@ export default {
     black: "#000000",
     orange: "#DAA520",
     grey: "#9CA091",
-    
+    poisonousRed: "#ef5555",
+    white: "#ffffff",    
 };

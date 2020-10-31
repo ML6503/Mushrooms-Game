@@ -14,6 +14,7 @@ import {
     PanResponder,
 } from 'react-native';
 
+import Colors from '../constants/colors';
 
 const basketImg = require('../assets/images/basket.png');
 
@@ -22,7 +23,6 @@ const Swiper = ({ navigation }) => {
     // adding animated values
     const translateX = new Animated.Value(0); 
 
-    console.log(translateX);
     // PanResponder code
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
@@ -82,10 +82,12 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         alignItems: 'center',
+        backgroundColor: Colors.backGround,
     },
     title: {
         fontSize: 20,
         marginVertical: 40,
+        fontWeight: 'bold',
     },
     buttonContainer: {
         flexDirection: 'row',

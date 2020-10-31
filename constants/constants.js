@@ -7,3 +7,8 @@ export const status = {
     IN_BASKET: "in_basket",
     IN_FIELD: "in_field",
 };
+
+export const edibility = {
+    EDIBLE: "edible",
+    POISONOUS: "poisonous",    
+};
