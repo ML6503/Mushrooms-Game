@@ -11,13 +11,13 @@ const { status: statusConst } = require('../constants/constants');
 
 const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms, index, handleMushroomSelected, status, }) => {
     
-    const onPress = () => { handleMushroomSelected(index) };
+    const onPress = () => handleMushroomSelected(index);
     
     const pan = useRef(new Animated.ValueXY(), { useNativeDriver: true },);
 
     const panResponder = useRef(
         PanResponder.create({
-      
+            useNativeDriver: true ,
             onStartShouldSetPanResponder: () => true,
           
             onPanResponderMove: Animated.event([null, {
@@ -47,19 +47,17 @@ const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms
                     setBgColor();                   
                     pan.current.flattenOffset();                                   
                 }            
-            },
+            },         
                      
-        })
+        }), { useNativeDriver: true },
     ).current; 
 
     return (
         status === statusConst.IN_BASKET
-            ? (<View style={styles.mushroom}/>)             
+            ? (<View style={styles.mushroom}/>)         
     
-            : (< TouchableWithoutFeedback onPress={ onPress } >
-        
-                <View style={styles.mushroom}>
-          
+            : (< TouchableWithoutFeedback onPress={ onPress } >        
+                <View style={styles.mushroom}>          
                     { status === statusConst.PICKED ?  
                         ( <Animated.View {...panResponder.panHandlers} style={pan.current.getLayout()}>
                             <Image

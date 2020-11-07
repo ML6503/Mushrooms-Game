@@ -38,7 +38,7 @@ const GameScreen = ({ navigation }) => {
         const selectedMushroom = mArray.filter((m) => m.status === statusConst.PICKED);
                 
         return selectedMushroom[0];
-    }
+    };
     
     const handleMushroomSelected = (i) => {
        
