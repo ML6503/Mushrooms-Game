@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { TouchableWithoutFeedback, StyleSheet, View, Image, ImageBackground, Animated, PanResponder  } from 'react-native';
 import Svg, { Path, G } from 'react-native-svg';
 import PropTypes from 'prop-types';
+import { LogBox } from 'react-native';
 
 import { images } from '../constants/imagesFungi';
 
@@ -10,7 +11,11 @@ const forest = require('../assets/images/forest.png');
 const { status: statusConst } = require('../constants/constants');
 
 const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms, index, handleMushroomSelected, status, }) => {
-    
+    // workaround to avoid irritating yellow warnings of useNativeDriver.
+    // useEffect(() => {
+    //     LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
+    // }, []);
+
     const onPress = () => handleMushroomSelected(index);
     
     const pan = useRef(new Animated.ValueXY(), { useNativeDriver: true },);

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { View, StyleSheet, Dimensions, Animated, PanResponder } from 'react-native';
+import { View, StyleSheet, Dimensions, StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
 
 import Mushrooms from '../components/Mushrooms';
@@ -93,7 +93,8 @@ const GameScreen = ({ navigation }) => {
     });   
      
     return (        
-        <View style={styles.container}>  
+        <View style={styles.container}>
+            <StatusBar translucent backgroundColor='transparent' />  
             { mushrooms !== null ? 
                 <>
                     <View style={styles.containerMushrooms}>           
@@ -123,6 +124,7 @@ const GameScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     
     container: {
+        flex: 1,
         alignItems: 'center',
         display: 'flex',       
         flexDirection: 'row',

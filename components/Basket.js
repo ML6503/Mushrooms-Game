@@ -37,10 +37,8 @@ const Basket = (props) => {
     if(getBasketMushrooms(mushrooms)[BASKET_SIZE-1].id) {        
         props.navigation.push('Basket', {
             mushroomsBasket: getBasketMushrooms(mushrooms),
-        })
-        console.log('WE are in IF FULL BASKET and we have', props.navigation, 'nav');
-    }    
-    
+        })        
+    }
  
     return (        
         
@@ -62,7 +60,7 @@ const Basket = (props) => {
             </View>
         </View>
     )
-}
+};
 
 const styles = StyleSheet.create({
     basketImg: {
