@@ -36,7 +36,7 @@ const BasketMushroom  = ( { mushroom, index, showMushroomInfo, name }) => {
 
 const BasketScreen = ({ navigation }) => {    
     const  mushroomsBasket = navigation.state.params.mushroomsBasket;
-    
+
     const zeroEdible = mushroomsBasket.findIndex((m) => m.edibility === edibilityConst.EDIBLE ) === -1 ? true : false;
     const  zeroPoisonous = mushroomsBasket.findIndex((m) => m.edibility === edibilityConst.POISONOUS ) === -1 ? true : false;
 
@@ -65,7 +65,7 @@ const BasketScreen = ({ navigation }) => {
             <View style={styles.containerMushrooms}>                           
                 <View style={styles.edibleMushrooms}>                     
                     <Text style={styles.mushroomsHeader}>Edible</Text>
-                    <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, }}/>                     
+                    {/* <View style={{ borderBottomColor: 'white', borderBottomWidth: 1, }}/>                      */}
                     {zeroEdible ? (
                         <View style={styles.textWrapper}>
                             <Text style={styles.text}>No Edible Mushrooms. Try Again!</Text>
@@ -82,7 +82,7 @@ const BasketScreen = ({ navigation }) => {
                 </View>              
                 <View style={styles.poisonousMushrooms}>                    
                     <Text style={styles.mushroomsHeader}>Poisonous</Text>
-                    <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, }}/>  
+                    {/* <View style={{ borderBottomColor: 'white', borderBottomWidth: 1, }}/>   */}
                     {zeroPoisonous ? (
                         <View style={styles.textWrapper}>
                             <Text style={styles.text}>No Poisonous Mushrooms!</Text>
@@ -101,18 +101,18 @@ const BasketScreen = ({ navigation }) => {
             </View> 
             <View style={styles.button}>
                 <Button
-                    title="Back" 
+                    title="back" 
                     onPress={() => navigation.navigate('StartGame')}
                     color={Colors.gameButton}                    
                 />
             </View>  
-            <Image
+            {/* <Image
                 source={basketImg}                         
                 pointerEvents={'none'}
                 style={styles.basketImg}
                 // style={StyleSheet.absoluteFillObject}
             />
-            
+             */}
         </View>
     );
 };
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     },
     mushroomsHeader: {
         textAlign: 'center',
-        padding: '5%',
+        paddingTop: '8%',
         fontWeight: 'bold',
         textTransform: 'uppercase',
         color: Colors.white,
@@ -180,7 +180,10 @@ const styles = StyleSheet.create({
         // paddingTop: "2%",
         fontWeight: 'bold',
         textTransform: 'uppercase',
-        // color: Colors.black,              
+        // backgroundColor: Colors.black,
+        textShadowColor: 'rgba(0, 0, 0, 0.75)',
+        textShadowOffset: {width: -1, height: 1},
+        textShadowRadius: 10,          
         padding:'10%',    
     },
     textWrapper: {
@@ -210,7 +213,7 @@ const styles = StyleSheet.create({
         //resizeMode: 'contain',
         alignSelf: 'flex-end',        
         marginBottom: '-5%',
-        opacity: 0.7,
+        // opacity: 0.7,
         zIndex: 50,
         
     },   

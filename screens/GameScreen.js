@@ -71,15 +71,12 @@ const GameScreen = ({ navigation }) => {
         return gesture.moveY > dz.y && gesture.moveY < dz.y + dz.height;
     }, []);
 
-    const updateMushrooms = () => {  
-        // console.log("pickedRef from updateMushrooms", pickedRef.current);     
+    const updateMushrooms = () => {          
         const updatedMushrooms = mushroomsRef.current.map((m) => (m.id === pickedRef.current) ? { ...m, status: statusConst.IN_BASKET } : m);      
 
-        setMushrooms(updatedMushrooms);
-        // console.log("OUR MUSHROOMS after basket", updatedMushrooms);
+        setMushrooms(updatedMushrooms);        
         setPicked('');           
-    }
-
+    };
 
     const onMove = useCallback((_, gesture) => {
         if (isDropZone(gesture)) setBgColor('red');
@@ -129,22 +126,20 @@ const styles = StyleSheet.create({
         display: 'flex',       
         flexDirection: 'row',
         justifyContent: 'center',
-       
-        // marginLeft: 100,
         height: height,
         width: width,        
     },
     containerMushrooms: {
         flexBasis: '85%',
         height: height,
-        borderColor: 'red',
-        borderWidth: 2,
+        // borderColor: 'red',
+        // borderWidth: 2,
         zIndex: 2,
     },
     containerBasket: {
         flexBasis: '15%',
-        borderColor: 'red',
-        borderWidth: 2,
+        // borderColor: 'red',
+        // borderWidth: 2,
         zIndex: 1,
     },
     

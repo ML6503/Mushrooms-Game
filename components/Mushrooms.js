@@ -84,8 +84,7 @@ const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms
     )
 };
 const Mushrooms = ( props ) => {
-    const { mushrooms, handleMushroomSelected } = props;
-    
+    const { mushrooms, handleMushroomSelected } = props;    
       
     return (
         <ImageBackground source={forest} style={styles.backgroundImage} >
@@ -119,8 +118,8 @@ const styles = StyleSheet.create({
     },
     mushroom: {
         alignItems:'center',        
-        borderWidth: 1,
-        borderColor: "black",
+        // borderWidth: 1,
+        // borderColor: "black",
         flexBasis: "33.33%",              
         height: "33.33%",
         justifyContent: 'center',
@@ -129,8 +128,8 @@ const styles = StyleSheet.create({
     },
     field: {
         alignItems: 'center',
-        borderColor: 'blue',
-        borderWidth: 5,
+        // borderColor: 'blue',
+        // borderWidth: 5,
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',

@@ -64,14 +64,14 @@ const Basket = (props) => {
 
 const styles = StyleSheet.create({
     basketImg: {
-        height: 50,
-        width: 50,
+        height: 60,
+        width: 60,
         resizeMode: "contain",
     },
     basket: {
         flex:1,    
         justifyContent: 'space-between',
-        padding: 25,
+        padding: 30,
         alignItems:'center',
         backgroundColor: Colors.backGround,
         zIndex: 1,       
