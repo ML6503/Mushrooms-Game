@@ -36,12 +36,16 @@ const BasketMushroom  = ( { mushroom, index, showMushroomInfo, name }) => {
 
 const BasketScreen = ({ navigation }) => {    
     const  mushroomsBasket = navigation.state.params.mushroomsBasket;
+    
     const zeroEdible = mushroomsBasket.findIndex((m) => m.edibility === edibilityConst.EDIBLE ) === -1 ? true : false;
-    const  zeroPoisonous = mushroomsBasket.findIndex((m) => m.edibility === edibilityConst.POISONOUS ) === -1 ? true : false;   
+    const  zeroPoisonous = mushroomsBasket.findIndex((m) => m.edibility === edibilityConst.POISONOUS ) === -1 ? true : false;
+
     const edibleMushrooms = mushroomsBasket.filter((m) => m.edibility === edibilityConst.EDIBLE);
     const poisonousMushrooms = mushroomsBasket.filter((m) => m.edibility === edibilityConst.POISONOUS);
+
     const [name, setName] = useState('');
     const infoRef = useRef();
+
     useEffect(() => {
         infoRef.current = name
     }, [name]);
@@ -73,11 +77,12 @@ const BasketScreen = ({ navigation }) => {
                                 mushroom={m}
                                 showMushroomInfo={showMushroomInfo}
                                 name={name}
-                            />
+                            /> 
                         ))}            
                 </View>              
                 <View style={styles.poisonousMushrooms}>                    
                     <Text style={styles.mushroomsHeader}>Poisonous</Text>
+                    <View style={{ borderBottomColor: 'black', borderBottomWidth: 1, }}/>  
                     {zeroPoisonous ? (
                         <View style={styles.textWrapper}>
                             <Text style={styles.text}>No Poisonous Mushrooms!</Text>

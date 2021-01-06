@@ -12,9 +12,9 @@ const { status: statusConst } = require('../constants/constants');
 
 const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms, index, handleMushroomSelected, status, }) => {
     // workaround to avoid irritating yellow warnings of useNativeDriver.
-    // useEffect(() => {
-    //     LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
-    // }, []);
+    useEffect(() => {
+        LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
+    }, []);
 
     const onPress = () => handleMushroomSelected(index);
     
