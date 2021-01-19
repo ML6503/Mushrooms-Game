@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { View, StyleSheet, Dimensions, StatusBar } from 'react-native';
+import { View, StyleSheet, Dimensions, StatusBar, Animated } from 'react-native';
 import PropTypes from 'prop-types';
 
 import Mushrooms from '../components/Mushrooms';
@@ -76,12 +76,13 @@ const GameScreen = ({ navigation }) => {
 
         setMushrooms(updatedMushrooms);        
         setPicked('');           
-    };
+    };    
 
-    const onMove = useCallback((_, gesture) => {
-        if (isDropZone(gesture)) setBgColor('red');
-        else {
-            setBgColor('#2c3e50');            
+    const onMove = useCallback((_, gesture) => {        
+        if (isDropZone(gesture)) {
+            setBgColor('red');            
+        } else {
+            setBgColor('#2c3e50');                       
         }
     }, [isDropZone]);
 
@@ -109,7 +110,8 @@ const GameScreen = ({ navigation }) => {
                             navigation={navigation}
                             onLayout={setDropZoneValues}
                             style={ {backgroundColor: bgColor} }
-                            mushrooms={mushrooms}
+                            transformScale={bgColor !== undefined}
+                            mushrooms={mushrooms}                            
                         />              
                     </View> 
                 </>

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, StyleSheet, View, Image, } from 'react-native';
+import React, { useRef, useEffect, useState } from 'react';
+import { Button, StyleSheet, View, Image, Animated } from 'react-native';
 import Svg, { Path, G } from 'react-native-svg';
 import PropTypes from 'prop-types';
 import Colors from '../constants/colors';
@@ -32,6 +32,33 @@ const MushroomStatus = ({basketMushrooms}) => {
 };
 
 const Basket = (props) => {
+    // const [scaleStyle, setScaleStyle] = useState(1);
+    const anim = useRef(new Animated.Value(1), { useNativeDriver: true });
+    const scaleStyle = props.transformScale ? anim.current : 1;
+    
+    useEffect(() => {
+    // we start animation loop
+        if (props.transformScale) { Animated.loop(
+        // runs given animations in a sequence
+            Animated.sequence([
+                // increase size
+                Animated.timing(anim.current, {
+                    toValue: 1.1, 
+                    duration: 900,
+                    useNativeDriver: true
+                },  ),
+                // dicrease size
+                Animated.timing(anim.current, {
+                    toValue: 1, 
+                    duration: 900,
+                    useNativeDriver: true
+                },  { useNativeDriver: true })               
+            ])
+        ).start();
+        }
+    }, [props.transformScale]);    
+    
+
     const { mushrooms } = props;
     
     if(getBasketMushrooms(mushrooms)[BASKET_SIZE-1].id) {        
@@ -46,9 +73,15 @@ const Basket = (props) => {
             {/* { Object.values(getBasketMushrooms(mushrooms)).map( (m, i) => (< MushroomIcon key={i} m={m}/>)) } */}
             <MushroomStatus basketMushrooms={(getBasketMushrooms(mushrooms))}/>
             <View onLayout={props.onLayout} style={props.style}>
-                <Image
-                    style={styles.basketImg}
-                    source={basketImg}
+                <Animated.Image
+                    style={[ styles.basketImg,  { transform: [{ scale: scaleStyle }] } ]}                   
+                    // style={ {  
+                    //     height: 60,
+                    //     width: 60,
+                    //     resizeMode: "contain",
+                    //     transform: [{ scaleStyle }]
+                    // }}                   
+                    source={basketImg}                    
                 />
             </View>
             <View style={styles.button}>
@@ -65,8 +98,8 @@ const Basket = (props) => {
 const styles = StyleSheet.create({
     basketImg: {
         height: 60,
-        width: 60,
-        resizeMode: "contain",
+        width: 67,
+        resizeMode: 'stretch'      
     },
     basket: {
         flex:1,    
@@ -93,7 +126,7 @@ Basket.propTypes = {
     style: PropTypes.object.isRequired,
     navigation: PropTypes.object.isRequired,        
     mushrooms: PropTypes.array.isRequired,
-    
+    transformScale: PropTypes.bool.isRequired
 };
 
 MushroomIcon.propTypes ={

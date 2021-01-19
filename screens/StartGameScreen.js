@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     },
     basketImg: {
         height: 150,
-        width: 150,
-        resizeMode: "contain",
+        width: 160,
+        resizeMode: 'stretch',
         zIndex: 100,
     },
     basket: {

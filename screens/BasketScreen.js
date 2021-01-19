@@ -7,7 +7,7 @@ import { images } from '../constants/imagesFungi';
 import Colors from '../constants/colors';
 // import { getBasketMushrooms } from '../engine';
 
-const basketImg = require('../assets/images/basket.png');
+// const basketImg = require('../assets/images/basket.png');
 const {height, width} = Dimensions.get('window');
 const { edibility: edibilityConst } = require('../constants/constants');
 
