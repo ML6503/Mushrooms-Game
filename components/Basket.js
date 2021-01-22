@@ -72,7 +72,7 @@ const Basket = (props) => {
         <View style={styles.basket}>
             {/* { Object.values(getBasketMushrooms(mushrooms)).map( (m, i) => (< MushroomIcon key={i} m={m}/>)) } */}
             <MushroomStatus basketMushrooms={(getBasketMushrooms(mushrooms))}/>
-            <View onLayout={props.onLayout} style={props.style}>
+            <View onLayout={props.onLayout} style={[props.style, styles.basketBackground]}>
                 <Animated.Image
                     style={[ styles.basketImg,  { transform: [{ scale: scaleStyle }] } ]}                   
                     // style={ {  
@@ -100,6 +100,9 @@ const styles = StyleSheet.create({
         height: 60,
         width: 67,
         resizeMode: 'stretch'      
+    },
+    basketBackground: {
+        borderRadius: 30
     },
     basket: {
         flex:1,    

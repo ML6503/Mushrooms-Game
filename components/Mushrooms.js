@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     backgroundImage: {
         height: '100%',
         resizeMode: 'cover', // or 'stretch'
-        width: '100%',     
+        width: '100%'        
     },
 });
 
