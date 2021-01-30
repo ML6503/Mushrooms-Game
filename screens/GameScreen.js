@@ -1,9 +1,10 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { View, StyleSheet, Dimensions, StatusBar, Animated } from 'react-native';
+import { View, StyleSheet, Dimensions, StatusBar, Animated, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 import Mushrooms from '../components/Mushrooms';
 import Basket from '../components/Basket';
+import Preloader from '../components/Preloader';
 import { getMushrooms } from '../engine';
 
 const {height, width} = Dimensions.get('window');
@@ -12,7 +13,30 @@ const { status: statusConst } = require('../constants/constants');
 
 
 const GameScreen = ({ navigation }) => {
-    // code for dragging mushromms with Animated and PanResponder
+    // state and call on focus for Preloader on GameScreen before all pics are loaded
+    const [loading, setLoading] = useState(true);
+    // useEffect(() => {
+    //     const showPreloader = navigation.addListener('focus', () => {
+    //         // The screen is focused and we call setTimeout to change loader state to false
+    //         const noLoader = setTimeout(() => setLoading(false), 2500);
+           
+    //         return () => clearTimeout(noLoader);
+            
+            
+    //     });
+    
+    //     // Return the function to unsubscribe from the event so it gets removed on unmount
+    //     return showPreloader;
+    // }, [navigation, setLoading]);
+
+    useEffect(
+        () => {
+            const noLoader = setTimeout(() => setLoading(false), 3000);
+            return () => clearTimeout(noLoader);
+        }, [setLoading]
+    );
+
+    // code for dragging mushrooms with Animated and PanResponder
     // used from https://snack.expo.io/@arethel/9f9b64
     
     const [mushrooms, setMushrooms] = useState(null);
@@ -88,12 +112,12 @@ const GameScreen = ({ navigation }) => {
 
     const setDropZoneValues = useCallback((event) => {
         dropZoneValues.current = event.nativeEvent.layout;
-    });   
-     
-    return (        
+    });       
+    
+    return loading ? <Preloader loading={loading} /> : ( 
         <View style={styles.container}>
             <StatusBar translucent backgroundColor='transparent' />  
-            { mushrooms !== null ? 
+            { mushrooms !== null ?                 
                 <>
                     <View style={styles.containerMushrooms}>           
                         <Mushrooms          
@@ -102,7 +126,8 @@ const GameScreen = ({ navigation }) => {
                             setBgColor={setBgColor}
                             updateMushrooms={updateMushrooms}
                             mushrooms={mushrooms}
-                            handleMushroomSelected={handleMushroomSelected}/>                    
+                            handleMushroomSelected={handleMushroomSelected}
+                            setLoading={setLoading}/>                    
                     </View> 
                
                     <View style={styles.containerBasket}>  
@@ -116,7 +141,7 @@ const GameScreen = ({ navigation }) => {
                     </View> 
                 </>
                 : null}            
-        </View>        
+        </View>       
     );
 };
 
