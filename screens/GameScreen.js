@@ -32,7 +32,7 @@ const GameScreen = ({ navigation }) => {
     useEffect(
         () => {
             const noLoader = setTimeout(() => setLoading(false), 3000);
-            return () => clearTimeout(noLoader);
+            return () => clearTimeout(noLoader); 
         }, [setLoading]
     );
 
@@ -85,14 +85,15 @@ const GameScreen = ({ navigation }) => {
         setPicked(sMushroom.id);            
     };
 
- 
+    // console.log('PICKED MUSHROOM XY', pickedRef.current);
+
     const dropZoneValues = useRef(null);
     // const pan = useRef(new Animated.ValueXY(), { useNativeDriver: true },);
     const [bgColor, setBgColor] = useState();
      
     const isDropZone = useCallback((gesture) => {
-        const dz = dropZoneValues.current;
-        return gesture.moveY > dz.y && gesture.moveY < dz.y + dz.height;
+        const dz = dropZoneValues.current;      
+        return (gesture.moveY > dz.y && gesture.moveY < dz.y + dz.height) && (gesture.moveX > (width - dz.width) && gesture.moveX < width);
     }, []);
 
     const updateMushrooms = () => {          
@@ -114,7 +115,8 @@ const GameScreen = ({ navigation }) => {
         dropZoneValues.current = event.nativeEvent.layout;
     });       
     
-    return loading ? <Preloader loading={loading} /> : ( 
+    // return loading ? <Preloader loading={loading} /> : (
+    return loading ? <Preloader loading={loading} /> : (  
         <View style={styles.container}>
             <StatusBar translucent backgroundColor='transparent' />  
             { mushrooms !== null ?                 

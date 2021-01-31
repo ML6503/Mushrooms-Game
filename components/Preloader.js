@@ -26,15 +26,15 @@ const Preloader = () => {
         () => set(
             animation,
             loop({
-                duration: 5000,
+                duration: 3000,
                 easing: Easing.inOut(Easing.ease),
                 boomerang: true,                
             })),
         [animation]
     );
 
-    const scale = bInterpolate(animation, 0.6, 4);
-    const rotate = bInterpolate(animation, 0, 2 * Math.PI * 5);
+    const scale = bInterpolate(animation, 0.6, 2);
+    const rotate = bInterpolate(animation, 0, 1 * Math.PI * 2);
 
     return (
         

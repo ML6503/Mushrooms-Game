@@ -43,14 +43,14 @@ const Basket = (props) => {
             Animated.sequence([
                 // increase size
                 Animated.timing(anim.current, {
-                    toValue: 1.1, 
-                    duration: 900,
+                    toValue: 1.5, 
+                    duration: 1500,
                     useNativeDriver: true
                 },  ),
                 // dicrease size
                 Animated.timing(anim.current, {
-                    toValue: 1, 
-                    duration: 900,
+                    toValue: 0.8, 
+                    duration: 1500,
                     useNativeDriver: true
                 },  { useNativeDriver: true })               
             ])
@@ -73,19 +73,15 @@ const Basket = (props) => {
             {/* { Object.values(getBasketMushrooms(mushrooms)).map( (m, i) => (< MushroomIcon key={i} m={m}/>)) } */}
             <MushroomStatus basketMushrooms={(getBasketMushrooms(mushrooms))}/>
             <View onLayout={props.onLayout} style={[props.style, styles.basketBackground]}>
-                <Animated.Image
-                    style={[ styles.basketImg,  { transform: [{ scale: scaleStyle }] } ]}                   
-                    // style={ {  
-                    //     height: 60,
-                    //     width: 60,
-                    //     resizeMode: "contain",
-                    //     transform: [{ scaleStyle }]
-                    // }}                   
-                    source={basketImg}                    
-                />
+                <View>
+                    <Animated.Image
+                        style={[ styles.basketImg,  { transform: [{ scale: scaleStyle }] } ]}              
+                        source={basketImg}                    
+                    />
+                </View>              
             </View>
             <View style={styles.button}>
-                <Button
+                <Button 
                     title="Back" 
                     onPress={() => props.navigation.navigate('StartGame')}
                     color={Colors.gameButton}                    
@@ -109,8 +105,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 30,
         alignItems:'center',
-        backgroundColor: Colors.backGround,
-        zIndex: 1,       
+        backgroundColor: Colors.backGround              
     },
     basketMushroom: {
         alignItems: "center",

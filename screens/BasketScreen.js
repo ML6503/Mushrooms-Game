@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, StyleSheet, Dimensions, Image, Text, TouchableWithoutFeedback,Button, StatusBar } from 'react-native';
+import { View, StyleSheet, Dimensions, Image, Text, TouchableWithoutFeedback, Button, StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
 import Svg, { Path, G } from 'react-native-svg';
 

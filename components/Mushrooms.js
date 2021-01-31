@@ -84,7 +84,7 @@ const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms
     )
 };
 const Mushrooms = ( props ) => {
-    const { mushrooms, handleMushroomSelected } = props;    
+    const { mushrooms, handleMushroomSelected } = props;     
       
     return (
         <ImageBackground source={forest} style={styles.backgroundImage} >
