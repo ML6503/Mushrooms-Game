@@ -31,7 +31,7 @@ const GameScreen = ({ navigation }) => {
 
     useEffect(
         () => {
-            const noLoader = setTimeout(() => setLoading(false), 3000);
+            const noLoader = setTimeout(() => setLoading(false), 2500);
             return () => clearTimeout(noLoader); 
         }, [setLoading]
     );

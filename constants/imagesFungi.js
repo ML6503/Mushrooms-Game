@@ -9,5 +9,6 @@ export const images = {
     syroezhka: require('../assets/images/mushroom.png'),
     ryzhik: require('../assets/images/ryzhik.png'),
     zelenushka: require('../assets/images/zelenushka.png'),
-    grib: require('../assets/images/grib.svg'),    
+    grib: require('../assets/images/grib.svg'),
+    belyi: require('../assets/images/belyi.png'),    
 };

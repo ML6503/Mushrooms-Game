@@ -26,7 +26,7 @@ const Preloader = () => {
         () => set(
             animation,
             loop({
-                duration: 3000,
+                duration: 3500,
                 easing: Easing.inOut(Easing.ease),
                 boomerang: true,                
             })),

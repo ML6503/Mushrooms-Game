@@ -38,23 +38,24 @@ const Basket = (props) => {
     
     useEffect(() => {
     // we start animation loop
-        if (props.transformScale) { Animated.loop(
-        // runs given animations in a sequence
-            Animated.sequence([
+        if (props.transformScale) {
+            Animated.loop(
+                // runs given animations in a sequence
+                Animated.sequence([
                 // increase size
-                Animated.timing(anim.current, {
-                    toValue: 1.5, 
-                    duration: 1500,
-                    useNativeDriver: true
-                },  ),
-                // dicrease size
-                Animated.timing(anim.current, {
-                    toValue: 0.8, 
-                    duration: 1500,
-                    useNativeDriver: true
-                },  { useNativeDriver: true })               
-            ])
-        ).start();
+                    Animated.timing(anim.current, {
+                        toValue: 1.5, 
+                        duration: 1500,
+                        useNativeDriver: true
+                    },  ),
+                    // dicrease size
+                    Animated.timing(anim.current, {
+                        toValue: 0.8, 
+                        duration: 1500,
+                        useNativeDriver: true
+                    },  { useNativeDriver: true })               
+                ])
+            ).start();
         }
     }, [props.transformScale]);    
     
