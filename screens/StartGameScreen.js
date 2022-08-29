@@ -29,7 +29,7 @@ const Swiper = ({ navigation, setArrowOpacity }) => {
         onMoveShouldSetPanResponder: () => true,
         onPanResponderMove: (e, gesture) => {
             setArrowOpacity(0);            
-            Animated.event([null, { dx: translateX, useNativeDriver: false }], {useNativeDriver: false})(e, gesture);            
+            Animated.event([null, { dx: translateX }], {useNativeDriver: false})(e, gesture);            
         },
         onPanResponderRelease: () => { 
             navigation.navigate('Game');         
@@ -44,7 +44,7 @@ const Swiper = ({ navigation, setArrowOpacity }) => {
 
     return (
         <Animated.View 
-            style={{transform: [{ translateX }], useNativeDriver: false }}
+            style={ { transform: [{ translateX }] } }
             {...panResponder.panHandlers}            
         >
             <View style={styles.basket}>

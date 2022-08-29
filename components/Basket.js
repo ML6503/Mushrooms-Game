@@ -54,8 +54,7 @@ const Basket = (props) => {
                         duration: 1500,
                         useNativeDriver: true
                     },  { useNativeDriver: true })               
-                ]),
-                { useNativeDriver: false }
+                ])
             ).start();
         }
     }, [props.transformScale]);    

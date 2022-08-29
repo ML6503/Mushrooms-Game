@@ -43,7 +43,7 @@ const Preloader = () => {
         
         <View style={styles.container}>  
             <Animated.View 
-                style={{ transform: [{ scale }, { rotate }], useNativeDriver: false }}>
+                style={{ transform: [{ scale }, { rotate }] }}>
                 <View >
                     <Image
                         style={styles.loaderImg}
