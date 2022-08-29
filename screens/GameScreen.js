@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Mushrooms from '../components/Mushrooms';
 import Basket from '../components/Basket';
-import Preloader from '../components/Preloader';
+// import Preloader from '../components/Preloader';
 import { getMushrooms } from '../engine';
 
 const {height, width} = Dimensions.get('window');
@@ -116,7 +116,7 @@ const GameScreen = ({ navigation }) => {
     });       
     
     // return loading ? <Preloader loading={loading} /> : (
-    return loading ? <Preloader loading={loading} /> : (  
+    return (  
         <View style={styles.container}>
             <StatusBar translucent backgroundColor='transparent' />  
             { mushrooms !== null ?                 

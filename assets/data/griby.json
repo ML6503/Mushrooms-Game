@@ -2,68 +2,131 @@
     "mushrooms":
     [
         {
-        "id": "lisichka",
-        "name": "chanterelle",        
-        "edibility":"edible",
-        "score": 4,
-        "status": "in_field"     
-    },
-   {
-        "id": "poganka",
-        "name": "death-cup",        
-        "edibility":"poisonous",
-        "score": -5,
-        "status": "in_field"   
-    },
-    {
-        "id": "mokhovik",
-        "name": "variegated bolete",        
-        "edibility":"edible",
-        "score": 4,
-        "status": "in_field"        
-    },
-    {
-        "id": "mukhomor",
-        "name": "fly agaric",        
-        "edibility":"poisonous",
-        "score": -5,
-        "status": "in_field"         
-    },
-     {
-        "id": "openok",
-        "name": "honey fungus",        
-        "edibility":"edible",
-        "score": 4,
-        "status": "in_field"   
-    },
-    {
-        "id": "belyi",
-        "name": "king bolete",        
-        "edibility":"edible",
-        "score": 5,
-        "status": "in_field"      
-    },
-    {
-        "id": "ryzhik",
-        "name": "saffron milk cap",        
-        "edibility":"edible",
-        "score": 5,
-        "status": "in_field"   
-    },
-    {
-        "id": "syroezhka",
-        "name": "russula",        
-        "edibility":"edible",
-        "score": 3,
-        "status": "in_field" 
-    },
-    {
-        "id": "zelenushka",
-        "name": "man on horseback",        
-        "edibility":"poisonous",
-        "score": -5,
-        "status": "in_field" 
-    }
+            "id": "lisichka",
+            "name": "chanterelle",        
+            "edibility":"edible",
+            "score": 4,
+            "status": "in_field"     
+        },
+        {
+            "id": "blednayaPoganka",
+            "name": "death-cup",        
+            "edibility":"poisonous",
+            "score": -5,
+            "status": "in_field"   
+        },
+        {
+            "id": "belayaPoganka",
+            "name": "destroying angel",        
+            "edibility":"poisonous",
+            "score": -4,
+            "status": "in_field"   
+        },
+        {
+            "id": "maslyenok",
+            "name": "larch bolete",        
+            "edibility": "edible",
+            "score": 4,
+            "status": "in_field"        
+        },
+        {
+            "id": "mukhomor",
+            "name": "fly agaric",        
+            "edibility": "poisonous",
+            "score": -5,
+            "status": "in_field"         
+        },
+        {
+            "id": "openok",
+            "name": "honey fungus",        
+            "edibility": "edible",
+            "score": 4,
+            "status": "in_field"   
+        },
+        {
+            "id": "belyi",
+            "name": "king bolete",        
+            "edibility": "edible",
+            "score": 5,
+            "status": "in_field"      
+        },
+        {
+            "id": "ryzhik",
+            "name": "saffron milk cap",        
+            "edibility": "edible",
+            "score": 5,
+            "status": "in_field"   
+        },
+        {
+            "id": "syroezhka",
+            "name": "russula",        
+            "edibility": "edible",
+            "score": 3,
+            "status": "in_field" 
+        },
+        {
+            "id": "zelenushka",
+            "name": "starry agaric",        
+            "edibility": "poisonous",
+            "score": -5,
+            "status": "in_field" 
+        },
+        {
+            "id": "champignons",        
+            "name": "champignons",        
+            "edibility":"edible",
+            "score": 2,
+            "status": "in_field"
+        },
+        {
+            "id": "goluboyGruzd",
+            "name": "lactarius indigo",        
+            "edibility": "edible",
+            "score": 5,
+            "status": "in_field"   
+        },
+        {
+            "id": "shiitake",
+            "name": "shiitake",        
+            "edibility": "edible",
+            "score": 3,
+            "status": "in_field"   
+        },
+        {
+            "id": "smorchok",
+            "name": "morel",        
+            "edibility": "edible",
+            "score": 4,
+            "status": "in_field" 
+        },
+        {
+            "id": "truffle",
+            "name": "truffle",        
+            "edibility": "edible",
+            "score": 5,
+            "status": "in_field" 
+        },
+        {
+            "id": "veshenka",
+            "name": "oyster mushroom", 
+            "edibility": "edible",
+            "score": 3,
+            "status": "in_field" 
+        },
+        {
+            "id": "lozhnyZontik",
+            "name": "false parasol",        
+            "edibility": "poisonous",
+            "score": -4,
+            "status": "in_field"   
+        },
+        {
+            "id": "muchnistyiMukhomor",
+            "name": "american floury amanita",        
+            "edibility": "poisonous",
+            "score": -3,
+            "status": "in_field"   
+        }
     ]
 
 }

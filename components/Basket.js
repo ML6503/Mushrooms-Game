@@ -54,7 +54,8 @@ const Basket = (props) => {
                         duration: 1500,
                         useNativeDriver: true
                     },  { useNativeDriver: true })               
-                ])
+                ]),
+                { useNativeDriver: false }
             ).start();
         }
     }, [props.transformScale]);    
@@ -76,7 +77,7 @@ const Basket = (props) => {
             <View onLayout={props.onLayout} style={[props.style, styles.basketBackground]}>
                 <View>
                     <Animated.Image
-                        style={[ styles.basketImg,  { transform: [{ scale: scaleStyle }] } ]}              
+                        style={[ styles.basketImg,  { transform: [{ scale: scaleStyle }], useNativeDriver: false } ]}              
                         source={basketImg}                    
                     />
                 </View>              

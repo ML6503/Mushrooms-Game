@@ -12,9 +12,9 @@ const { status: statusConst } = require('../constants/constants');
 
 const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms, index, handleMushroomSelected, status, }) => {
     // workaround to avoid irritating yellow warnings of useNativeDriver.
-    useEffect(() => {
-        LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
-    }, []);
+    // useEffect(() => {
+    //     LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
+    // }, []);
 
     const onPress = () => handleMushroomSelected(index);
     
@@ -40,10 +40,10 @@ const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms
                 if (!isDropZone(gesture)) {
                     Animated.spring(
                         pan.current,
-                        {toValue:{x:0,y:0}},
-                        {
-                            useNativeDriver: true
-                        },                        
+                        {toValue:{x:0,y:0}, useNativeDriver: true },
+                        // {
+                        //     useNativeDriver: true
+                        // },                        
                     ).start();
                 }
                 if(isDropZone(gesture)) {

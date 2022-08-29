@@ -2,9 +2,10 @@ import React, { useEffect, useState }  from 'react';
 import { View, StyleSheet, Image  } from 'react-native';
 import Constants from "expo-constants";
 import Animated, { Easing } from "react-native-reanimated";
-import { loop, bInterpolate } from "react-native-redash";
-
+import { loop } from "react-native-redash";
+import { bInterpolate } from 'react-native-redash/lib/module/Animations';
 import Colors from '../constants/colors';
+
 
 const loaderImg = require('../assets/images/fungiLogo.png');
 
@@ -36,11 +37,13 @@ const Preloader = () => {
     const scale = bInterpolate(animation, 0.6, 2);
     const rotate = bInterpolate(animation, 0, 1 * Math.PI * 2);
 
+
+
     return (
         
         <View style={styles.container}>  
             <Animated.View 
-                style={{ transform: [{ scale }, { rotate }] }}>
+                style={{ transform: [{ scale }, { rotate }], useNativeDriver: false }}>
                 <View >
                     <Image
                         style={styles.loaderImg}
