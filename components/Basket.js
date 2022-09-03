@@ -72,7 +72,7 @@ const Basket = (props) => {
         
         <View style={styles.basket}>
             {/* { Object.values(getBasketMushrooms(mushrooms)).map( (m, i) => (< MushroomIcon key={i} m={m}/>)) } */}
-            <MushroomStatus basketMushrooms={(getBasketMushrooms(mushrooms))}/>
+            <MushroomStatus basketMushrooms={getBasketMushrooms(mushrooms)}/>
             <View onLayout={props.onLayout} style={[props.style, styles.basketBackground]}>
                 <View>
                     <Animated.Image

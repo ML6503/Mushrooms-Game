@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Mushrooms from '../components/Mushrooms';
 import Basket from '../components/Basket';
-// import Preloader from '../components/Preloader';
+import Preloader from '../components/Preloader';
 import { getMushrooms } from '../engine';
 
 const {height, width} = Dimensions.get('window');
@@ -15,23 +15,23 @@ const { status: statusConst } = require('../constants/constants');
 const GameScreen = ({ navigation }) => {
     // state and call on focus for Preloader on GameScreen before all pics are loaded
     const [loading, setLoading] = useState(true);
-    // useEffect(() => {
-    //     const showPreloader = navigation.addListener('focus', () => {
-    //         // The screen is focused and we call setTimeout to change loader state to false
-    //         const noLoader = setTimeout(() => setLoading(false), 2500);
+    useEffect(() => {
+        const showPreloader = navigation.addListener('focus', () => {
+            // The screen is focused and we call setTimeout to change loader state to false
+            // const noLoader = setTimeout(() => setLoading(false), 2500);
            
-    //         return () => clearTimeout(noLoader);
+            // () => clearTimeout(noLoader);
             
             
-    //     });
+        });
     
-    //     // Return the function to unsubscribe from the event so it gets removed on unmount
-    //     return showPreloader;
-    // }, [navigation, setLoading]);
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return () => showPreloader;
+    }, [navigation, setLoading]);
 
     useEffect(
         () => {
-            const noLoader = setTimeout(() => setLoading(false), 2500);
+            const noLoader = setTimeout(() => setLoading(false), 3500);
             return () => clearTimeout(noLoader); 
         }, [setLoading]
     );
@@ -115,8 +115,8 @@ const GameScreen = ({ navigation }) => {
         dropZoneValues.current = event.nativeEvent.layout;
     });       
     
-    // return loading ? <Preloader loading={loading} /> : (
-    return (  
+    return loading ? <Preloader loading={loading} /> : (
+    // return (  
         <View style={styles.container}>
             <StatusBar translucent backgroundColor='transparent' />  
             { mushrooms !== null ?                 

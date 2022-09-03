@@ -1,49 +1,60 @@
-import React, { useEffect, useState }  from 'react';
-import { View, StyleSheet, Image  } from 'react-native';
+import React, { useEffect, useState, useRef }  from 'react';
+import { View, StyleSheet, Image,   Animated, Easing  } from 'react-native';
 import Constants from "expo-constants";
-import Animated, { Easing } from "react-native-reanimated";
-import { loop } from "react-native-redash";
-import { bInterpolate } from 'react-native-redash/lib/module/Animations';
+// import Animated, { Easing } from "react-native-reanimated";
 import Colors from '../constants/colors';
-
 
 const loaderImg = require('../assets/images/fungiLogo.png');
 
-const { Value,  useCode, set } = Animated;
-
-// loader loop using https://snack.expo.io/@git/github.com/wcandillon/can-it-be-done-in-react-native:bonuses/looping
-const Preloader = () => {
+const Preloader = () => {    
+    let rotateValueHolder = new Animated.Value(0);
+    const [viewState, setViewState] = useState(true);
+    let scale = useRef(new Animated.Value(0.5)).current;
+     
+     const startImageScale = () => {
+        if (viewState) {
+            Animated.timing(scale, {
+              toValue: 1,
+              duration: 2000,
+              easing: Easing.inOut(Easing.ease),
+              useNativeDriver: false,
+            }).start(() => setViewState(false));
+          } else {
+            Animated.timing(scale, {
+              toValue: 0.2,
+              duration: 2000,
+              easing: Easing.inOut(Easing.ease),
+              useNativeDriver: false,
+            }).start(() => setViewState(true));
+          }
+     };
     
-    const [play, setPlay] = useState(true);
-    useEffect(
-        () => {
-            const stopAnimation = setTimeout(() => setPlay(false), 3000);
-            return () => clearTimeout(stopAnimation);
-        }, [setPlay]
-    );
-    const animation = new Value(play ? 1 : 0);  
-
-    useCode(       
-        () => set(
-            animation,
-            loop({
-                duration: 3500,
-                easing: Easing.inOut(Easing.ease),
-                boomerang: true,                
-            })),
-        [animation]
-    );
-
-    const scale = bInterpolate(animation, 0.6, 2);
-    const rotate = bInterpolate(animation, 0, 1 * Math.PI * 2);
+      const startImageRotateFunction = () => {
+        rotateValueHolder.setValue(0);
+        Animated.timing(rotateValueHolder,  {
+          toValue: 1,
+          duration: 2000,
+          easing: Easing.linear,
+          useNativeDriver: false,
+        }).start(() => startImageRotateFunction());
+      };
+    
+      const RotateData = rotateValueHolder.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '360deg'],
+      });
+    
+    
+      useEffect(() => {
+        startImageRotateFunction();
+        startImageScale();
+      });
 
 
-
-    return (
-        
+    return (        
         <View style={styles.container}>  
             <Animated.View 
-                style={{ transform: [{ scale }, { rotate }] }}>
+                style={{ transform: [{ scale }, { rotate:  RotateData }] }}>
                 <View >
                     <Image
                         style={styles.loaderImg}
@@ -67,8 +78,8 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.backGround        
     },
     loaderImg: {
-        height: 150,
-        width: 160,
+        height: 800,
+        width: 800,
         resizeMode: 'stretch'
     }
 });
