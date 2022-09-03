@@ -14,7 +14,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#638972"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,9 +23,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": true
     },
-    "description": "App Game with  js, React Native, \n",
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#638972"
+      }
+    },
+    "description": "App Mushroom Game with js, React Native, \n",
     "githubUrl": "https://github.com/ML6503/Mushrooms-Game"
   }
 }
