@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Svg, { Path, G } from 'react-native-svg';
 
@@ -14,20 +14,44 @@ import {
     StatusBar,
 } from 'react-native';
 
+import { Audio } from 'expo-av';
+
 import Colors from '../constants/colors';
 
 const basketImg = require('../assets/images/basket.png');
 
 const Swiper = ({ navigation, setArrowOpacity }) => {
-
+    
     // adding animated values
-    const translateX = new Animated.Value(0); 
+    const translateX = new Animated.Value(0);
+
+    const [sound, setSound] = useState();
+
+    const playSound = async () => {
+       
+        const { sound } = await Audio.Sound.createAsync(
+            require('../assets/sounds/game.wav')
+        );
+
+        setSound(sound);
+      
+        await sound.playAsync();
+    };
+
+    useEffect(() => {
+        return sound
+          ? () => {             
+              sound.unloadAsync();
+            }
+          : undefined;
+      }, [sound]);
 
     // PanResponder code
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
         onMoveShouldSetPanResponder: () => true,
         onPanResponderMove: (e, gesture) => {
+            playSound();
             setArrowOpacity(0);            
             Animated.event([null, { dx: translateX }], {useNativeDriver: false})(e, gesture);            
         },
