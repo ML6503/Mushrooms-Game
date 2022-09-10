@@ -5,7 +5,8 @@ import Svg, { Path, G } from 'react-native-svg';
 
 import { images } from '../constants/imagesFungi';
 import Colors from '../constants/colors';
-// import { getBasketMushrooms } from '../engine';
+import { playSound } from '../engine';
+import { sound as soundConst } from '../constants/constants';
 
 // const basketImg = require('../assets/images/basket.png');
 const {height, width} = Dimensions.get('window');
@@ -45,10 +46,23 @@ const BasketScreen = ({ navigation }) => {
 
     const [name, setName] = useState('');
     const infoRef = useRef();
+    const [sound, setSound] = useState();
+
+    const soundType = poisonousMushrooms ? soundConst.BAD : soundConst.TADA;        
+
+        useEffect(() => {
+            playSound(setSound, soundType);
+        }, []);
 
     useEffect(() => {
         infoRef.current = name
     }, [name]);
+
+    useEffect(() => {
+        return sound
+          ? () =>  sound.unloadAsync()
+          : undefined;
+      }, [sound]);
     
     const showMushroomInfo = (id) => {
         mushroomsBasket.map((mushroom) =>{

@@ -1,14 +1,15 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { TouchableWithoutFeedback, StyleSheet, View, Image, ImageBackground, Animated, PanResponder  } from 'react-native';
 import Svg, { Path, G } from 'react-native-svg';
 import PropTypes from 'prop-types';
 import { LogBox } from 'react-native';
 
 import { images } from '../constants/imagesFungi';
+import { playSound } from '../engine';
 
 const forest = require('../assets/images/forest.png');
 
-const { status: statusConst } = require('../constants/constants');
+import { status as  statusConst, sound as soundConst } from '../constants/constants';
 
 const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms, index, handleMushroomSelected, status, }) => {
     // workaround to avoid irritating yellow warnings of useNativeDriver.
@@ -16,7 +17,18 @@ const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms
         LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
     }, []);
 
-    const onPress = () => handleMushroomSelected(index);
+    useEffect(() => {
+        return sound
+          ? () => sound.unloadAsync()
+          : undefined;
+      }, [sound]);
+
+    const [sound, setSound] = useState();
+
+    const onPress = () => {
+        playSound(setSound, soundConst.PICK);
+        handleMushroomSelected(index);
+    };
     
     const pan = useRef(new Animated.ValueXY(), { useNativeDriver: true },);
 
@@ -36,7 +48,7 @@ const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms
             },
             ),
             onPanResponderRelease: (_e, gesture) => {
-                
+                playSound(setSound, soundConst.DROP);
                 if (!isDropZone(gesture)) {
                     Animated.spring(
                         pan.current,
@@ -83,6 +95,7 @@ const Mushroom = ( { mushroomId, isDropZone, onMove, setBgColor, updateMushrooms
             )
     )
 };
+
 const Mushrooms = ( props ) => {
     const { mushrooms, handleMushroomSelected } = props;     
       
@@ -97,8 +110,7 @@ const Mushrooms = ( props ) => {
                         status={m.status}
                         handleMushroomSelected ={handleMushroomSelected}
                         mushroomId={m.id}
-                        mushroom={m}
-                        // style={  props.style } 
+                        mushroom={m}                      
                         { ...props }                   
                     />
                 ))}  
@@ -117,9 +129,7 @@ const styles = StyleSheet.create({
         zIndex: 101,           
     },
     mushroom: {
-        alignItems:'center',        
-        // borderWidth: 1,
-        // borderColor: "black",
+        alignItems:'center',
         flexBasis: "33.33%",              
         height: "33.33%",
         justifyContent: 'center',
@@ -128,8 +138,6 @@ const styles = StyleSheet.create({
     },
     field: {
         alignItems: 'center',
-        // borderColor: 'blue',
-        // borderWidth: 5,
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
@@ -145,8 +153,7 @@ const styles = StyleSheet.create({
 });
 
 Mushroom.propTypes = {
-    mushroomId: PropTypes.string.isRequired, 
-    // style: PropTypes.object.isRequired,
+    mushroomId: PropTypes.string.isRequired,    
     index: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
     handleMushroomSelected: PropTypes.func.isRequired,
@@ -156,8 +163,7 @@ Mushroom.propTypes = {
     updateMushrooms: PropTypes.func.isRequired,
 };
 
-Mushrooms.propTypes = {
-    // style: PropTypes.object.isRequired,
+Mushrooms.propTypes = {    
     mushrooms: PropTypes.array.isRequired,
     handleMushroomSelected: PropTypes.func.isRequired,    
 };

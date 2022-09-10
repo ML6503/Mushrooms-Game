@@ -14,9 +14,11 @@ import {
     StatusBar,
 } from 'react-native';
 
-import { Audio } from 'expo-av';
+import { playSound } from '../engine';
 
 import Colors from '../constants/colors';
+
+import { sound as soundConst } from '../constants/constants';
 
 const basketImg = require('../assets/images/basket.png');
 
@@ -27,18 +29,7 @@ const Swiper = ({ navigation, setArrowOpacity }) => {
 
     const [sound, setSound] = useState();
 
-    const playSound = async () => {
-       
-        const { sound } = await Audio.Sound.createAsync(
-            require('../assets/sounds/game.wav')
-        );
-
-        setSound(sound);
-      
-        await sound.playAsync();
-    };
-
-    useEffect(() => {
+      useEffect(() => {
         return sound
           ? () => {             
               sound.unloadAsync();
@@ -51,7 +42,7 @@ const Swiper = ({ navigation, setArrowOpacity }) => {
         onStartShouldSetPanResponder: () => true,
         onMoveShouldSetPanResponder: () => true,
         onPanResponderMove: (e, gesture) => {
-            playSound();
+            playSound(setSound, soundConst.GAME);
             setArrowOpacity(0);            
             Animated.event([null, { dx: translateX }], {useNativeDriver: false})(e, gesture);            
         },
